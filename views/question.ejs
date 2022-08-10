@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   
+    <!-----META TAGS------>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Making the Legal profession more  effective, accesible and flexible for all">
+    <meta name="keywords" content="legal, law, legal tech, tech law, law quiz, legal practice, legal technology, legal news">
+    
+    
+    <!-----Title of Page------->
+    <title>LegalRoom</title>
+
+    <!----------   FONT FAMILY LINKS ------------------>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet">
+
+<!---------- EXTERNAL CSS LINKS ---------->
+<link rel="stylesheet" href="public/css/reset.css"/>
+<link rel="stylesheet" href="public/css/normalize.css"/>
+<link rel="stylesheet" href="public/css/style.css"/>
+
+ </head>
+
+
+<body>
+
+<!--------    Header    ----------->
+<header class="header">
+
+    <!-----Navigation ----------->
+<nav class="navigationbar">
+    <!----Name Logo ----->
+   <h1 class="logo" >  <b style="color:darkmagenta"> <span class="fas fa-gavel fa-rotate-180 fa-1x"></span>egal</b><b style="color:#000">Room </b></h1>
+     
+    <!----Links-->
+   <ul class="link-list">     
+ <li> <a href="index.html">Home </a></li>
+   <li> <a href=""> About Us </a> </li>
+     <li> <a href="">Services <span class="fas fa-caret-down"></a></span> 
+
+      <!----Services DropDown-->
+       <ul class="services_dropdown">
+        <li><a href="#"> Get a Legal Document</a></li>
+          <li><a href="#">Find a Lawyer</a></li>
+          <li><a href="#">Join Community</a></li>
+          <li> <a href="/question" class="active">Questions</a> </li>
+          <li> <a href="/ask">Ask a Question</a></li>
+          <li><a href="#">Create a Meeting </a></li>
+          <li><a href="#">Users</a></li>
+       </ul>
+       <!---------------------->
+    </li>
+     <li><a href="">Contact </a></span></li>
+    <li> <a href="#">Login</a></li> 
+    <li> <a href="#">SignUp</a> </li>
+  <li>  <a href="#">FAQ</a> </li>
+  
+</ul>
+
+</nav>
+
+
+<!------Navigation Bar II------>
+<nav class="navigationbar_two">
+    <!----Name Logo ----->
+   <h1 class="logo" >  <b style="color:darkmagenta"> <span class="fas fa-gavel fa-rotate-180 fa-1x"></span>egal</b><b style="color:#000">Room </b></h1>
+     
+    <!----Links-->
+   <ul class="link-list">     
+  <li> <a href="/">Home </a></li>
+   <li> <a href=""> About Us </a> </li>
+     <li> <a href="">Services <span class="fas fa-caret-down"></a></span> 
+  
+      <!----Services DropDown-->
+       <ul class="services_dropdown">
+        <li><a href="#"> Get a Legal Document</a></li>
+          <li><a href="#">Find a Lawyer</a></li>
+          <li><a href="#">Join Community</a></li>
+          <li> <a href="/question" class="active">Questions</a> </li>
+          <li> <a href="/ask">Ask a Question</a></li>
+          <li><a href="#">Create a Meeting </a></li>
+          <li><a href="#">Users</a></li>
+       </ul>
+       <!---------------------->
+    </li>
+     <li><a href="/contact">Contact </a></span></li>
+    <li> <a href="#">Login</a></li> 
+    <li> <a href="#">SignUp</a> </li>
+  <li>  <a href="#">FAQ</a> </li>
+  
+  </ul>
+  
+  </nav>
+</header>
+
+
+    <h1 style = "text-align:center; margin-top:7rem;"> Legal Roomies Questions </h1>
+   
+   
+    <ul class="questions">
+    <% for(let i = 0; i  < info.length; i++) {%>
+<li class="question">
+     <div class="questionTitle"><%= info[i].questionHeader %> </div>
+       <div class="questionSummary"><%= info[i].questionBody %> </div> 
+  <span class="likeIcon"><%= info[i].likes %> <button class="fa fa-thumbs-up questionIcon" aria-hidden="true"> </button> </span>
+  <span class="dislikeIcon"><%= info[i].dislikes %> <button class="fa fa-thumbs-down questionIcon" aria-hidden="true"> </button> </span>
+       <button class='fa fa-comment questionIcon'> </button>
+       <button class='fa fa-trash questionIcon'></button>
+</li>
+    <% } %>
+    </ul>
+
+    
+    
+<!-------Font Awesome Link---->
+<script src="https://kit.fontawesome.com/4448a8754e.js" crossorigin="anonymous"></script>
+   
+<!----External JS Link ----->
+<script src='public/js/main.js'></script>
+</body>
+
+</html>
