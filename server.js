@@ -67,7 +67,7 @@ app.put('/addOneLike', (req, res) =>{
          }
      }, {
          sort: {_id: -1},
-         upsert: false 
+         upsert: true 
      })
      .then(result => {
          console.log('Added One Like')
