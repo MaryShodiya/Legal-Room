@@ -102,19 +102,20 @@
 
     <h1 style = "text-align:center; margin-top:7rem;"> Legal Roomies Questions </h1>
    
-   
+   <section class="questionbox">
     <ul class="questions">
-    <% for(let i = 0; i  < info.length; i++) {%>
+  <% for(let i = 0; i  < info.length; i++) {%>
 <li class="question">
      <div class="questionTitle"><%= info[i].questionHeader %> </div>
        <div class="questionSummary"><%= info[i].questionBody %> </div> 
   <span class="likeIcon"><%= info[i].likes %> <button class="fa fa-thumbs-up questionIcon" aria-hidden="true"> </button> </span>
   <span class="dislikeIcon"><%= info[i].dislikes %> <button class="fa fa-thumbs-down questionIcon" aria-hidden="true"> </button> </span>
-       <button class='fa fa-comment questionIcon'> </button>
+       <button class='fa fa-comment questionIcon '> </button>
        <button class='fa fa-trash questionIcon'></button>
 </li>
     <% } %>
     </ul>
+    </section>
 
     
     
