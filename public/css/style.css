@@ -564,7 +564,7 @@ color: #000;
   }
   
   /* ASk Question Form Buttons */
- .addQuestion, .cancelQuestion {
+ .addQuestion, .cancelQuestion, .comment {
   margin-top:1rem;
   padding: 0.8rem;
   width: 150px;
@@ -583,7 +583,7 @@ color: #000;
   /************* QUESTION.EJS STYLING ******************************/
 
   .question{
-   width: 400px;
+   width: 550px;
    border: 1px solid #ccc;
    padding: 1rem;
    margin-top: 1rem;
@@ -612,3 +612,12 @@ color: #000;
   .dislikeIcon{
     color:red
   }
+
+  /* Comment Styling */
+  .addComment{
+    margin-top: 1rem;
+    width: 350px;
+    padding: 0.5rem;
+    border: 1px solid #ccc
+  }
+

@@ -39,7 +39,8 @@ app.get('/ask', (req, res) =>{
 app.get('/question', (req, res) =>{
    db.collection('questions').find().sort({likes: -1}).toArray()
    .then(data =>{
-     res.render('question.ejs', { info:data })
+     res.render('question.ejs', { info:data, 
+        })
    })
    .catch(error =>console.error(error))
 })
@@ -58,6 +59,19 @@ app.post('/addQuestion', (req, res) =>{
 })
  .catch(err => console.error(err))   
 })
+
+
+app.post('/addComment', (req, res) =>{
+ db.collection('questions').insertOne({commentBody : req.body.commentBody
+})
+.then(result => {
+    console.log('A New Comment Added')
+    res.redirect('/question')
+})
+.catch(err => console.error(err))
+})
+
+
 
 
 app.put('/addOneLike', (req, res) =>{
