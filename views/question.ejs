@@ -112,21 +112,17 @@
   <span class="dislikeIcon"><%= info[i].dislikes %> <button class="fa fa-thumbs-down questionIcon" aria-hidden="true"> </button> </span>
        <button class='fa fa-comment questionIcon '> </button>
        <button class='fa fa-trash questionIcon'></button>
-      
-       
-      
+     <div class="commentBody"> <%= info[i].commentBody %> </div>
        
 
        <form action="/addComment" method="POST">
         <input type="text"  class="addComment" placeholder="Add Comment..." name="commentBox">
+        <input type="hidden" name="info_id" value="<%= info._id %> "/>
         <input type="submit" class="comment" value="Add Comment" name="addComment">
+        
         </form>
 
-        <% for(let j = 0; j < info[i].length; j++) {%>
-          <li id="comment">
-            <div class="commentBody"> <%= info[i].commentBody %> </div>
-          </li>
-                  <% } %>
+        
        
 </li>
     <% } %>

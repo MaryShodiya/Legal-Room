@@ -48,7 +48,6 @@ app.get('/question', (req, res) =>{
 
 
 
-
 app.post('/addQuestion', (req, res) =>{
    db.collection('questions').insertOne({questionHeader : req.body.questionHeader,
     questionBody: req.body.questionBody
@@ -62,16 +61,17 @@ app.post('/addQuestion', (req, res) =>{
 
 
 app.post('/addComment', (req, res) =>{
- db.collection('questions').insertOne({commentBody : req.body.commentBody
-})
-.then(result => {
-    console.log('A New Comment Added')
-    res.redirect('/question')
-})
-.catch(err => console.error(err))
-})
-
-
+    db.collection('questions').updateOne({_id: req.body.info_id}, {
+        $push: {
+            "comments" : {username: req.body.comment_username, comment: req.body.comment}
+        }
+    })
+  .then(result => {
+      console.log('A New Comment Added')
+      res.redirect('/question')
+  })
+  .catch(err => console.error(err))
+ })
 
 
 app.put('/addOneLike', (req, res) =>{
