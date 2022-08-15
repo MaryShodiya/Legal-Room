@@ -39,10 +39,10 @@ app.get('/ask', (req, res) =>{
 app.get('/question', (req, res) =>{
    db.collection('questions').find().sort({likes: -1}).toArray()
    .then(data =>{
-     res.render('question.ejs', { info:data, 
+     res.render('question.ejs', { info:data,
         })
    })
-   .catch(error =>console.error(error))
+   .catch(error => console.error(error))
 })
 
 
@@ -63,7 +63,7 @@ app.post('/addQuestion', (req, res) =>{
 app.post('/addComment', (req, res) =>{
     db.collection('questions').updateOne({_id: req.body.info_id}, {
         $push: {
-            "comments" : {username: req.body.comment_username, comment: req.body.comment}
+            "comments" : {username: req.body.username, comment: req.body.comment}
         }
     })
   .then(result => {
