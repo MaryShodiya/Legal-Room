@@ -63,7 +63,7 @@ app.post('/addQuestion', (req, res) =>{
 app.post('/addComment', (req, res) =>{
     db.collection('questions').updateOne({_id: req.body.info_id}, {
         $push: {
-            "comments" : {username: req.body.username, comment: req.body.comment}
+            "comments" : {comments: req.body.comment}
         }
     })
   .then(result => {

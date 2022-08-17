@@ -113,17 +113,18 @@
        <button class='fa fa-comment questionIcon '> </button>
        <button class='fa fa-trash questionIcon'></button>
         
-       <% if (info[i].comments) %>
-       <% for (let j = 0; j < info[i].comments.length) { %>
+       <% if (info[i].comments) { %>
+       <% for (let j = 0; j < info[i].comments.length; j++) { %>
+        <li>
         <div class="comments_container">
-          <h5 class="comment_username">  <%= comments.username %> </h5>
-          <p class="commentBody"> <%= comments.comment %> </p>
+          <div class="commentBody"> <%= info[i].comments[j].comment %> </div>
           </div>
+          </li>
         <% } %>
         <% } %>
         <form action="/addComment" method="POST">
           <input type="text"  class="addComment" placeholder="Add Comment..." name="commentBox">
-          <input type="text"  class=addUser placeholder="Add User..." name="addUser">
+       <!----  <input type="text"  class=addUser placeholder="Add User..." name="addUser">-->
           <input type="hidden" name="info_id" value="<%=info._id %>">
           <input type="submit" class="comment" value="Add Comment" name="addComment">
           </form>
@@ -135,12 +136,7 @@
     </section>
      
 
-    <form action="/addComment" method="POST">
-      <input type="text"  class="addComment" placeholder="Add Comment..." name="commentBox">
-      <input type="hidden" name="info_id" value="{{info._id}}">
-      <input type="submit" class="comment" value="Add Comment" name="addComment">
-      
-      </form>
+    
     
     
 <!-------Font Awesome Link---->

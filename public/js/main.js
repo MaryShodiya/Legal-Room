@@ -53,8 +53,6 @@ const downvoteQuestion = document.querySelectorAll('.dislikeIcon')
 const replyQuestion = document.querySelectorAll('.fa-comment')
 const deleteQuestion = document.querySelectorAll('.fa-trash')
 
-
-
 Array.from(upvoteQuestion).forEach((element) =>{
   element.addEventListener('click', addLike)
 })
@@ -66,6 +64,9 @@ Array.from(downvoteQuestion).forEach((element) =>{
 Array.from(deleteQuestion).forEach((element) =>{
   element.addEventListener('click', deleteQuestionAdded)
 })
+
+
+
 
 
 
@@ -86,8 +87,6 @@ async function addLike(){
     const data = await res.json()
     console.log(data)
    location.reload()
-
-
   } catch(err) {
     console.log(err)
   }
