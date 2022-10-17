@@ -43,7 +43,7 @@
         <li><a href="#"> Get a Legal Document</a></li>
           <li><a href="#">Find a Lawyer</a></li>
           <li><a href="#">Join Community</a></li>
-          <li> <a href="/question">Questions</a> </li>
+          <li> <a href="/questions">Questions</a> </li>
           <li> <a href="/ask" class="active">Ask a Question</a></li>
           <li><a href="#">Create a Meeting </a></li>
           <li><a href="#">Users</a></li>
@@ -76,7 +76,7 @@
         <li><a href="#"> Get a Legal Document</a></li>
           <li><a href="#">Find a Lawyer</a></li>
           <li><a href="#">Join Community</a></li>
-          <li> <a href="/question">Questions</a> </li>
+          <li> <a href="/questions">Questions</a> </li>
           <li> <a href="/ask" class="active">Ask a Question</a></li>
           <li><a href="#">Create a Meeting </a></li>
           <li><a href="#">Users</a></li>
@@ -94,23 +94,50 @@
 </header>
    <h1 class="question-header" style="margin:6rem">Ask a Question</h1> 
 
+   <div>
+    <p><strong>User Name</strong>: <%= user.userName %></p>
+    <p><strong>Email</strong>: <%= user.email %></p>
+    <a href="/logout" class="col-3 btn btn-primary">Logout</a>
+</div>
+
    <section class = "ask_section">
     <section class="ask_content" style="margin-top:7rem">
      
 
 
-    <form action="/addQuestion" method="POST">
+    <form action="/question/addQuestion" enctype="multipart/form-data" method="POST">
       
         <label for="questionHeader"> Title </label>  
-      <input type="text" class="input_box" placeholder="Title of the Question" name="questionHeader">
+      <input type="text" class="input_box" placeholder="Title of the Question" name="title" id="title">
        <br>
       <label for="question"> Body of The Question</label> 
-       <textarea class="questionBody" name="questionBody" placeholder="Start your question with Who, Where, How, What, Why"></textarea>
-       
+       <textarea class="questionBody" name="question_body" id="question_body" placeholder="Start your question with Who, Where, How, What, Why"></textarea>
+       <div class="mb-3">
+        <label for="imgUpload" class="form-label">Image</label>
+        <input type="file" class="form-control" id="imageUpload" name="file">
+      </div>
        <input type="submit" value="Add Question" name="addQuestion" class="addQuestion">
         <input type="submit" value="Cancel" name="cancel" class="cancelQuestion">
     </form>
   
+
+  <div class="col-6">
+      <ul class="row list-unstyled">
+      <% for(var i=0; i<questions.length; i++) {%>
+        <li class="col-6 justify-content-between mt-5">
+          <a href="/question/<%= questions[i]._id%>">
+            <img class="img-fluid" src="<%= questions[i].image%>">
+          </a>
+        </li>
+      <% } %>
+      </ul>
+      <div class="row justify-content-center mt-5">
+     
+      </div>  
+    </div> 
+
+
+
     </section>
 
     <section class="basic_steps"> 

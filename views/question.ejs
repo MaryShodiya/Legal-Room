@@ -40,7 +40,7 @@
      
     <!----Links-->
    <ul class="link-list">     
- <li> <a href="index.html">Home </a></li>
+ <li> <a href="index.ejs">Home </a></li>
    <li> <a href=""> About Us </a> </li>
      <li> <a href="">Services <span class="fas fa-caret-down"></a></span> 
 
@@ -57,8 +57,8 @@
        <!---------------------->
     </li>
      <li><a href="">Contact </a></span></li>
-    <li> <a href="#">Login</a></li> 
-    <li> <a href="#">SignUp</a> </li>
+    <li> <a href="/login">Login</a></li> 
+    <li> <a href="/signup">SignUp</a> </li>
   <li>  <a href="#">FAQ</a> </li>
   
 </ul>
@@ -73,7 +73,7 @@
      
     <!----Links-->
    <ul class="link-list">     
-  <li> <a href="/">Home </a></li>
+  <li> <a href="index.ejs">Home </a></li>
    <li> <a href=""> About Us </a> </li>
      <li> <a href="">Services <span class="fas fa-caret-down"></a></span> 
   
@@ -82,7 +82,7 @@
         <li><a href="#"> Get a Legal Document</a></li>
           <li><a href="#">Find a Lawyer</a></li>
           <li><a href="#">Join Community</a></li>
-          <li> <a href="/question" class="active">Questions</a> </li>
+          <li> <a href="/questions" class="active">Questions</a> </li>
           <li> <a href="/ask">Ask a Question</a></li>
           <li><a href="#">Create a Meeting </a></li>
           <li><a href="#">Users</a></li>
@@ -90,8 +90,8 @@
        <!---------------------->
     </li>
      <li><a href="/contact">Contact </a></span></li>
-    <li> <a href="#">Login</a></li> 
-    <li> <a href="#">SignUp</a> </li>
+    <li> <a href="/login">Login</a></li> 
+    <li> <a href="/signup">SignUp</a> </li>
   <li>  <a href="#">FAQ</a> </li>
   
   </ul>
@@ -99,42 +99,51 @@
   </nav>
 </header>
 
+    <h1 style = "text-align:center; margin-top:7rem;"> 
+      Legal Roomies Questions 
+    </h1>
+    <section class="questionbox">
+      <ul class="questions">
 
-    <h1 style = "text-align:center; margin-top:7rem;"> Legal Roomies Questions </h1>
-   
-   <section class="questionbox">
-    <ul class="questions">
-  <% for(let i=0; i  < info.length; i++) {%>
-<li class="question">
-     <div class="questionTitle"><%= info[i].questionHeader %> </div>
-       <div class="questionSummary"><%= info[i].questionBody %> </div> 
-  <span class="likeIcon"><%= info[i].likes %> <button class="fa fa-thumbs-up questionIcon" aria-hidden="true"> </button> </span>
-  <span class="dislikeIcon"><%= info[i].dislikes %> <button class="fa fa-thumbs-down questionIcon" aria-hidden="true"> </button> </span>
-       <button class='fa fa-comment questionIcon '> </button>
-       <button class='fa fa-trash questionIcon'></button>
-        
-       <% if (info[i].comments) { %>
-       <% for (let j = 0; j < info[i].comments.length; j++) { %>
-        <li>
-        <div class="comments_container">
-          <div class="commentBody"> <%= info[i].comments[j].comment %> </div>
-          </div>
-          </li>
-        <% } %>
-        <% } %>
-        <form action="/addComment" method="POST">
-          <input type="text"  class="addComment" placeholder="Add Comment..." name="commentBox">
-       <!----  <input type="text"  class=addUser placeholder="Add User..." name="addUser">-->
-          <input type="hidden" name="info_id" value="<%=info._id %>">
-          <input type="submit" class="comment" value="Add Comment" name="addComment">
-          </form>
+<% for(let i=0; i  < questions.length; i++) {%>
+  <li class="question">
+    <div class="questionTitle">
+      <%= questions[i].title %> </div>
+         <div class="questionSummary">
+           <%= questions[i].question_body %> 
+          </div> 
+   <span><form class="likeIcon" action="/question/addOneLike/<%=questions[i]._id %>?_method=PUT" method="POST">
+      <%= questions[i].likes %> 
+      <button class="fa fa-thumbs-up questionIcon" aria-hidden="true"> 
+      </button> </span>
+    </form>
 
-</li>   
-    <% } %>
-</ul>
+      <% if(questions[i].user == user.id){ %>
+        <form action="/question/deleteQuestion/<%= questions[i]._id %>?_method=DELETE"
+              method="POST">
+            
+              <button class='fa fa-trash questionIcon'></button>
+            </form>
+            <% } %>
 
+
+      <div class="questionImage">
+        <a href="/question/<%= questions[i]._id%>"></a>
+      <img src="<%= questions[i].image%>">
+      </a>
+
+      </div>
+ 
+
+  </li>
+  <% } %>
+      </ul>
+  
     </section>
+
+
      
+    
 
     
     

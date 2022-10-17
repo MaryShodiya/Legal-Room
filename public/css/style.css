@@ -1,5 +1,11 @@
 /*************** MAIN CSS STYLING *********************/
 
+
+
+
+
+
+
 /******* Clear fix hack *******/
 .clearfix:after {
     content: ".";
@@ -93,7 +99,7 @@ ul li:hover ul.services_dropdown{
     }
 
 
-/******* Description Section ************/
+/******* Description Section
 .description {
 
     padding-left: 20px;
@@ -102,7 +108,7 @@ ul li:hover ul.services_dropdown{
     display: block;
     margin-top: 5rem;
    
-}
+}***/
 .description_heading{
     font-weight: bold;
     font-size: 40px;
@@ -208,11 +214,11 @@ ul li:hover ul.services_dropdown{
 .services{
     margin-top: 10rem;
     padding:2rem;
-    /*background-image: radial-gradient( circle 588px at 31.7% 40.2%,  rgba(225,200,239,0.5) 21.4%, rgba(163,225,233,0.5) 57.1% );*/
-    background: #c9d6ff; /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #c9d6ff, #e2e2e2); /* Chrome 10-25, Safari 5.1-6 */
+    /*background-image: radial-gradient( circle 588px at 31.7% 40.2%,  rgba(225,200,239,0.5) 21.4%, rgba(163,225,233,0.5) 57.1% );
+    background: #c9d6ff; /* fallback for old browsers 
+  background: -webkit-linear-gradient(to right, #c9d6ff, #e2e2e2); /* Chrome 10-25, Safari 5.1-6 
   background: linear-gradient(to right, #c9d6ff, #e2e2e2);
-  border-top-left-radius:620% 135%;
+  border-top-left-radius:620% 135%;*/
 }
 .services_container_box{
     display:flex;

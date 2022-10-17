@@ -48,7 +48,7 @@ function scrollFunction() {
 /////////// ICON BUTTONS ON EJS \\\\\\\\\\\\\\\\
 //\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\//
 
-const upvoteQuestion = document.querySelectorAll('.likeIcon')
+/*const upvoteQuestion = document.querySelectorAll('.likeIcon')
 const downvoteQuestion = document.querySelectorAll('.dislikeIcon')
 const replyQuestion = document.querySelectorAll('.fa-comment')
 const deleteQuestion = document.querySelectorAll('.fa-trash')
@@ -136,7 +136,7 @@ async function disLike(){
   }catch(err){
     console.log(err)
   }
-}
+}*/
 
 
 

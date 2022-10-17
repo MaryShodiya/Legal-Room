@@ -1,30 +1,127 @@
 const express = require('express') //connect express to server
 const app = express() //connect application to express server
-const MongoClient = require('mongodb').MongoClient //connect MongoDB to server
-const PORT = 2124 //port localhost
-require('dotenv').config() //database string
+const mongoose = require('mongoose')
+const passport = require('passport')
+const session = require('express-session')
+const MongoStore = require('connect-mongo')(session)
+const methodOverride = require("method-override")
+const flash = require('express-flash')
+const logger = require('morgan')
+const connectDB = require('./config/database')
+const mainRoutes = require('./routes/main')
+const roomRoutes = require('./routes/posts')
+const questionRoutes = require('./routes/question')
+/*const profileRoutes = require('./routes/profile')*/
+const chatRoutes = require('./routes/chatroom')
+const deleteRoutes = require('./routes/delete')
+const userRoutes = require('./routes/users')
+const { decode } = require('./middleware/jwt')
+const server = app.listen(process.env.PORT, ()=>{
+    console.log(`Server running on port, you better catch it!!`)
+})
+const socketio = require('socket.io')(server)
 
-let db,
-    dbConnectionStr = process.env.DB_STRING,
-    dbName = "LegalRoom"
+require('dotenv').config({path: './config/.env'}) //database string
 
 
-MongoClient.connect(dbConnectionStr, { useUnifiedTopology: true})
-.then(client => {
-    console.log(`Connected to ${dbName} Database... Catch it while you can`)
-     db = client.db(dbName)
+// Passport config
+require('./config/passport')(passport)
+
+
+
+connectDB()
+
+socketio.on('connection', (socket) => {
+    console.log("connected to socket")
+    socket.on('setup', (userName) => {
+        socket.join(userName._id)
+        console.log(`${userName.firstName} is online`)
+        socket.emit('connected')
+    })
+    
+socket.on('join chat', (room) => {
+    socket.join(room._id)
+    console.log(`User joined chat with room : ${room}`)
+})
+
 })
 
 
+/*initializeSocket.sockets.on('connection', function(socket) {
+    socket.on('username', function(username) {
+        socket.username = username;
+        initializeSocket.emit('is_online', '🔵 <i>' + socket.username + ' join the chat..</i>');
+    });
+
+    socket.on('disconnect', function(username) {
+        initializeSocket.emit('is_online', '🔴 <i>' + socket.username + ' left the chat..</i>');
+    })
+
+    socket.on('chat_message', function(message) {
+        initializeSocket.emit('chat_message', '<strong>' + socket.username + '</strong>: ' + message);
+    });
+
+});*/
+
+
+/*let db,
+    dbConnectionStr = process.env.DB_STRING,
+    dbName = "LegalRoom"*/
+
+
+/*MongoClient.connect(dbConnectionStr, { useUnifiedTopology: true})
+.then(client => {
+    console.log(`Connected to ${dbName} Database... Catch it while you can`)
+     db = client.db(dbName)
+})*/
+
+
 app.set('view engine', 'ejs')
+app.use(express.static('node_modules/tw-elements/dist/js'))
 app.use('/public/images', express.static('public/images'))
 app.use('/public/css', express.static('public/css'))
 app.use('/public/js', express.static('public/js'))
 app.use(express.static('public'))
 app.use(express.urlencoded({ extended:true})) //parse request path
 app.use(express.json()) //parse JSON response
+app.use(logger('dev'))
 
-app.get('/', (req, res) =>{
+
+
+app.use(methodOverride("_method"))
+
+// Sessions
+app.use(
+    session({
+      secret: process.env['DB_STRING'],
+      resave: false,
+      saveUninitialized: false,
+      store:  new MongoStore({ mongooseConnection: mongoose.connection }),
+      
+    })
+    
+  )
+
+app.use(passport.initialize())
+app.use(passport.session())
+
+app.use(flash())
+
+app.use('/', mainRoutes)
+app.use('/post', roomRoutes)
+app.use('/user', userRoutes)
+app.use('/chatroom', decode, chatRoutes)
+app.use('/delete', deleteRoutes)
+app.use('/question', questionRoutes)
+/*app.use('/profile', profileRoutes)*/
+
+
+
+
+
+
+
+/*app.get('/', (req, res) =>{
     res.sendFile(__dirname + '/index.html')
 })
 
@@ -44,8 +141,6 @@ app.get('/question', (req, res) =>{
    })
    .catch(error => console.error(error))
 })
-
-
 
 
 app.post('/addQuestion', (req, res) =>{
@@ -104,7 +199,7 @@ app.put('/addOneLike', (req, res) =>{
          res.json('DisLike Added')
      })
      .catch(err => console.error(err))
-})*/
+})
 
 
 
@@ -118,10 +213,11 @@ app.delete('/deleteQuestionAdded', (req, res) =>{
         res.json('A New Question Deleted from Json')
     })
     .catch(err => console.error(err))
+})*/
+
+
+
+/*app.listen(process.env.PORT, ()=>{
+    console.log(`Server running on port, you better catch it!!`)
 })
-
-
-
-app.listen(process.env.PORT || PORT, ()=>{
-    console.log(`Server running on port ${PORT}`)
-})
+*/
