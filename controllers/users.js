@@ -1,4 +1,4 @@
-const validator = require('validator')
+/*const validator = require('validator')
 const  { UserModel,  USER_TYPES } = require('../models/Users')
 
 module.exports = {
@@ -50,4 +50,4 @@ createUser: async (req, res) => {
           return res.status(500).json({success:false, err: err})
       }
   },
-}
+}*/

@@ -1,4 +1,4 @@
-const mongoose = require ('mongoose');
+/*const mongoose = require ('mongoose');
 const { v4 : uuidv4 } = require('uuid') ;
 
 const CHAT_ROOM_TYPES = {
@@ -74,4 +74,4 @@ ChatRoomSchema.statics.initiateChat = async function (
   }
 
 
-  module.exports = mongoose.model('ChatRoom', ChatRoomSchema)
+  module.exports = mongoose.model('ChatRoom', ChatRoomSchema)*/

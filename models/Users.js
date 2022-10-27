@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+/*const mongoose = require('mongoose');
 const { v4 : uuidv4 } = require('uuid');
 
   const USER_TYPES = {
@@ -71,4 +71,4 @@ UsersSchema.statics.getUserByIds = async function (ids) {
     }
   }
 
- module.exports = mongoose.model('Users', UsersSchema)
+ module.exports = mongoose.model('Users', UsersSchema)*/

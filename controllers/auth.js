@@ -1,8 +1,7 @@
 const passport = require("passport");
 const validator = require("validator");
 const User = require("../models/User");
-const jwt = require("../middleware/jwt");
-const cloudinary = require("../middleware/cloudinary")
+
 
 exports.getLogin = (req, res) => {
   if (req.user) {
@@ -105,7 +104,6 @@ exports.postSignup = (req, res, next) => {
     userName: req.body.userName,
     email: req.body.email,
     password: req.body.password,
-    profileImg : req.file.path
   });
 
   User.findOne(
@@ -136,9 +134,3 @@ exports.postSignup = (req, res, next) => {
 };
 
 
-exports.uploadPicture = (req, res, next) => {
-  const result = cloudinary.uploader.upload(req.file.path)
-  User.create({ profileImg : result.secure_url, cloudinaryId : result.public_id })
-  console.log("Profile uploaded successfully");
-  res.redirect("/profile");
-}

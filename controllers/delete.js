@@ -1,5 +1,5 @@
 const ChatRoomModel = require('../models/ChatRoom')
-const ChatMessageModel = require('../models/ChatMessage')
+const ChatMessageModel = require('../models/Chat')
 
 
 

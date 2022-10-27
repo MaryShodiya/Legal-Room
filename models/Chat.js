@@ -1,4 +1,44 @@
-const mongoose = require('mongoose')
+/*const mongoose = require("mongoose");
+
+const ChatSchema = new mongoose.Schema({ 
+  message: { 
+    type: String,
+    require: true,
+  },
+  sentAt : { 
+    type: Date,
+    default: Date.now,
+  },
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+  }
+})
+
+
+module.exports = mongoose.model("Chat",ChatSchema);*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*const mongoose = require('mongoose')
 const { v4 : uuidv4 } = require ("uuid")
 
 const MESSAGE_TYPES = {
@@ -238,4 +278,4 @@ const MESSAGE_TYPES = {
   }
 
 
-  module.exports = mongoose.model("ChatMessage", ChatMessageSchema)
+  module.exports = mongoose.model("ChatMessage", ChatMessageSchema)*/

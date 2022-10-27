@@ -1,14 +1,48 @@
 const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
+const Profile = require("../models/Profile"); 
+
+
 
 
 
 
 module.exports = {
-  getProfile: async (req, res) => {
+
+makePost:  (req, res) => {
+    res.render('postform.ejs')
+},
+
+editProfile:  (req, res) => {
+  res.render('editprofile.ejs', )
+},
+
+/*getChatroom: async (req, res, next) => {
+  try{
+  const chats = await Chat.findById(req.params.id);
+  const profile = await Profile.findById(req.params.id)
+  res.render('chatroom.ejs', {
+    chats: chats, 
+    user: req.user, 
+    profile: profile,
+  });
+  res.io.emit('is_online', `${req.user} has joined the chat`)
+  } catch (err) {
+    console.log(err);
+  }
+},*/
+
+
+
+getProfile: async (req, res) => {
     try {
       const posts = await Post.find({ user: req.user.id });
-      res.render("profile.ejs", { posts: posts, user: req.user });
+      const profile = await Profile.findOne({ user: req.user.id });
+
+      res.render("profile.ejs", { 
+        posts: posts, 
+        user: req.user, 
+        profile: profile });
     } catch (err) {
       console.log(err);
     }
@@ -16,7 +50,7 @@ module.exports = {
   getFeed: async (req, res) => {
     try {
       const posts = await Post.find().sort({ createdAt: "desc" }).lean();
-      res.render("feed.ejs", { posts: posts });
+      res.render("feed.ejs", { posts: posts, user: req.user });
     } catch (err) {
       console.log(err);
     }
@@ -29,8 +63,45 @@ module.exports = {
       console.log(err);
     }
   },
-   
 
+  /*postChatMessage: async (req, res) => {
+    try{
+     await Chat.create({
+       message: req.body.message,
+       user: req.user.id,
+     });
+     console.log (" A Message was sent");
+     res.redirect ("/messages");
+     console.log(req.body.message)
+    } catch (err) {
+      console.log(err);
+    }
+  },*/
+ 
+  postEditProfile: async (req, res) => {
+    try {
+      // Upload image to cloudinary
+      const result = await cloudinary.uploader.upload(req.file.path);
+
+      await Profile.create({
+        profileImage: result.secure_url,
+        cloudinaryId: result.public_id,
+        name: req.body.name,
+        location: req.body.location,
+        user: req.user.id,
+        work: req.body.work,
+        hobbies: req.body.hobbies,
+        skills: req.body.skills,
+        user:req.user.id,
+
+      });
+      console.log("Profile has been updated!");
+      res.redirect("/profile");
+      console.log(result)
+    } catch (err) {
+      console.log(err);
+  }
+},
 
   createPost: async (req, res) => {
     try {
@@ -38,7 +109,6 @@ module.exports = {
       const result = await cloudinary.uploader.upload(req.file.path);
 
       await Post.create({
-        title: req.body.title,
         image: result.secure_url,
         cloudinaryId: result.public_id,
         caption: req.body.caption,
@@ -47,6 +117,7 @@ module.exports = {
       });
       console.log("Post has been added!");
       res.redirect("/profile");
+      console.log(result)
     } catch (err) {
       console.log(err);
     }
@@ -80,4 +151,5 @@ module.exports = {
       res.redirect("/profile");
     }
   },
+   
 };

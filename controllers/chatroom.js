@@ -1,4 +1,46 @@
-const { ChatRoomModel, CHAT_ROOM_TYPES  } = require("../models/ChatRoom");
+//const Chat = require("../models/Chat");
+
+
+module.exports = {
+
+  getChatRoom: (req, res) => {
+      res.render('chatroom.ejs')
+  },
+}
+
+
+
+
+
+/*exports.getChatRoom = (io) => {
+  io.on ('connection', function (socket) {
+    console.log('User has joined chatroom')
+    socket.on('admin', function (req, res) {
+      res.render('chatroom.ejs')
+      console.log('Successfully connected socket')
+    });
+  })
+
+}*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*const { ChatRoomModel, CHAT_ROOM_TYPES  } = require("../models/ChatRoom");
 const validator = require('validator')
 const ChatMessageModel = require('../models/ChatMessage')
 const UsersModel = require('../models/Users')
@@ -116,4 +158,4 @@ return res.status(500).json({ success: false, error: error })
       } 
   },
 
-};
+};*/

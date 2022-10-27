@@ -1,4 +1,4 @@
-const express = require('express')
+/*const express = require('express')
 const router = express.Router()
 
 const chatRoomController = require("../controllers/chatroom")
@@ -14,4 +14,4 @@ router.post("/message/:roomId", chatRoomController.postMessage);
 
 router.put("/mark-read/:roomId", chatRoomController.markConversationReadByRoomId);
 
-module.exports = router
+module.exports = router*/

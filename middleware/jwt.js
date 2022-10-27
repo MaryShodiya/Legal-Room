@@ -1,4 +1,4 @@
-const jwt = require('jsonwebtoken');
+/*const jwt = require('jsonwebtoken');
 const UsersModel = require ('../models/Users');
 
 const SECRET_KEY = 'some_secret_key';
@@ -37,7 +37,7 @@ module.exports = {
           }
     }
 
-}
+}*/
    
 
 
