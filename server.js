@@ -9,15 +9,15 @@ const flash = require('express-flash')
 const logger = require('morgan')
 const connectDB = require('./config/database')
 const mainRoutes = require('./routes/main')
-const roomRoutes = require('./routes/posts')
+const postRoutes = require('./routes/posts')
+const commentRoutes = require("./routes/comments");
 const questionRoutes = require('./routes/question')
-const deleteRoutes = require('./routes/delete')
 const server = app.listen(process.env.PORT, ()=>{
     console.log(`Server running on port, you better catch it!!`)
 })
 
 const io = require('socket.io')(server) //connect server to socket.io
-const chatRoutes = require('./routes/chat')
+
 
 require('dotenv').config({path: './config/.env'}) //database string
 
@@ -100,10 +100,9 @@ app.use(passport.session())
 app.use(flash())
 
 app.use('/', mainRoutes)
-app.use('/post', roomRoutes)
-app.use('/delete', deleteRoutes)
+app.use('/post', postRoutes)
 app.use('/question', questionRoutes)
-app.use('/chat', chatRoutes)
+app.use("/comment", commentRoutes);
 
 
 

@@ -1,5 +1,7 @@
+
 const cloudinary = require("../middleware/cloudinary");
 const Question = require("../models/Question");
+const Profile = require("../models/Profile");
 
 
 
@@ -26,7 +28,9 @@ module.exports = {
   getQuestion: async (req, res) => {
     try {
       const question = await Question.findById(req.params.id);
-      res.render("question.ejs", { question: question, user: req.user });
+      const profile = await Question.find().populate('name', 'profileImage')
+      res.render("question.ejs", { question: question, user: req.user, profile});
+      console.log(profile)
     } catch (err) {
       console.log(err);
     }

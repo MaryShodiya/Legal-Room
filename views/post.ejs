@@ -1,6 +1,49 @@
-<%- include('partials/header') -%>
-
-    <br/>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <!-----META TAGS------>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="description" content="Making the Legal profession more  effective, accesible and flexible for all">
+      <meta name="keywords" content="legal, law, legal tech, tech law, law quiz, legal practice, legal technology, legal news">
+      <!-----Title of Page------->
+      <title>LegalRoom</title>
+  
+      <!----------   FONT FAMILY LINKS ------------------>
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet">
+  
+  <!--EXTERNAL CSS LINKS---> 
+  <link rel="stylesheet" href="public/css/reset.css"/>
+  <link rel="stylesheet" href="public/css/normalize.css"/>
+  <link rel="stylesheet" href="public/css/style.css"/>
+  
+  
+  
+  <!-- Font Awesome -->
+  <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    rel="stylesheet"
+  />
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+    rel="stylesheet"
+  />
+  <!-- MDB -->
+  <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.css"
+    rel="stylesheet"
+  />
+  
+  
+  <link rel="stylesheet" href="public/css/output.css" type="text/css" />
+  </head>
+  <body>
 
 <!--Section: News of the day-->
 <div class="row gx-5">
@@ -14,20 +57,47 @@
   </div>
 
   <div class="col-md-6 mb-4">
-    <span class="badge bg-danger px-2 py-1 shadow-1-strong mb-3"> <%= user.userName %></span>
+    
+    <span class="badge bg-danger px-2 py-1 shadow-1-strong mb-3"> 
+     
+      <%= profile.name %>
+     
+    </span>
     <h4><strong>Facilis consequatur eligendi</strong></h4>
     <p class="text-muted">
       <%= post.caption %>
     </p>
-    <form class="col-1" action="/post/likePost/<%= post.id %>?_method=PUT" method="POST">
+    <!---<form class="col-1" action="/post/likePost/<%= post.id %>?_method=PUT" method="POST">
     <button type="button" class="btn btn-primary fa fa-heart" type="submit"></button>
-    </form>
-    <h3 class="col-3">Likes: <%= post.likes %></h3>
+    </form>---->
+    <!--<h3 class="col-3"> <%= post.likes %></h3>--->
         <%if(post.user == user.id){ %>
         <form action="/post/deletePost/<%= post.id %>?_method=DELETE" method="POST" class="col-3">
           <button class="btn btn-primary fa fa-trash" type="submit"></button>
         </form>
         <%}%>
+
+    
+
+        <!--<div class="mt-5">
+          <h2>Add a comment</h2>
+          <form action="/comment/createComment/<%=post._id%>" method="POST">
+            <div class="mb-3">
+                <label for="comment" class="form-label">Comment</label>
+                <input type="text" class="form-control" id="comment" name="comment">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+        <ul>
+          <% for(var i=0; i < comments.length; i++) {%>
+            <li class="col-6 justify-content-between mt-5">
+              <%= comments[i].comment%>
+            </li>
+          <% } %>
+        </ul>--->
+
+
         <div class="col-6 mt-5">
           <a class="btn btn-primary" href="/profile">Return to Profile</a>
           <a class="btn btn-primary" href="/feed">Return to Feed</a>
@@ -35,6 +105,19 @@
   </div>
 </div>
 
+<!-- MDB -->
+<script
+type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.js"></script>
+
+<!------Font Awesome Link-->
+<script src="https://kit.fontawesome.com/4448a8754e.js" crossorigin="anonymous"></script>
+
+<!-------External JS LInk---->
+<script src="public/js/main.js"></script>
+</body>
+</html>
 
 
-<%- include('partials/footer') -%>
+
+
+

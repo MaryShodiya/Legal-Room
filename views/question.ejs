@@ -1,103 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-   
-    <!-----META TAGS------>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Making the Legal profession more  effective, accesible and flexible for all">
-    <meta name="keywords" content="legal, law, legal tech, tech law, law quiz, legal practice, legal technology, legal news">
-    
-    
-    <!-----Title of Page------->
-    <title>LegalRoom</title>
-
-    <!----------   FONT FAMILY LINKS ------------------>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet">
-
-<!---------- EXTERNAL CSS LINKS ---------->
-<link rel="stylesheet" href="public/css/reset.css"/>
-<link rel="stylesheet" href="public/css/normalize.css"/>
-<link rel="stylesheet" href="public/css/style.css"/>
-
- </head>
-
-
-<body>
-
-<!--------    Header    ----------->
-<header class="header">
-
-    <!-----Navigation ----------->
-<nav class="navigationbar">
-    <!----Name Logo ----->
-   <h1 class="logo" >  <b style="color:darkmagenta"> <span class="fas fa-gavel fa-rotate-180 fa-1x"></span>egal</b><b style="color:#000">Room </b></h1>
-     
-    <!----Links-->
-   <ul class="link-list">     
- <li> <a href="/">Home </a></li>
-   <li> <a href=""> About Us </a> </li>
-     <li> <a href="">Services <span class="fas fa-caret-down"></a></span> 
-
-      <!----Services DropDown-->
-       <ul class="services_dropdown">
-        <li><a href="#"> Get a Legal Document</a></li>
-          <li><a href="#">Find a Lawyer</a></li>
-          <li><a href="#">Join Community</a></li>
-          <li> <a href="/question" class="active">Questions</a> </li>
-          <li> <a href="/ask">Ask a Question</a></li>
-          <li><a href="#">Create a Meeting </a></li>
-          <li><a href="#">Users</a></li>
-       </ul>
-       <!---------------------->
-    </li>
-     <li><a href="">Contact </a></span></li>
-    <li> <a href="/login">Login</a></li> 
-    <li> <a href="/signup">SignUp</a> </li>
-  <li>  <a href="#">FAQ</a> </li>
-  
-</ul>
-
-</nav>
-
-
-<!------Navigation Bar II------>
-<nav class="navigationbar_two">
-    <!----Name Logo ----->
-   <h1 class="logo" >  <b style="color:darkmagenta"> <span class="fas fa-gavel fa-rotate-180 fa-1x"></span>egal</b><b style="color:#000">Room </b></h1>
-     
-    <!----Links-->
-   <ul class="link-list">     
-  <li> <a href="index.ejs">Home </a></li>
-   <li> <a href=""> About Us </a> </li>
-     <li> <a href="">Services <span class="fas fa-caret-down"></a></span> 
-  
-      <!----Services DropDown-->
-       <ul class="services_dropdown">
-        <li><a href="#"> Get a Legal Document</a></li>
-          <li><a href="#">Find a Lawyer</a></li>
-          <li><a href="#">Join Community</a></li>
-          <li> <a href="/questions" class="active">Questions</a> </li>
-          <li> <a href="/ask">Ask a Question</a></li>
-          <li><a href="#">Create a Meeting </a></li>
-          <li><a href="#">Users</a></li>
-       </ul>
-       <!---------------------->
-    </li>
-     <li><a href="/contact">Contact </a></span></li>
-    <li> <a href="/login">Login</a></li> 
-    <li> <a href="/signup">SignUp</a> </li>
-  <li>  <a href="#">FAQ</a> </li>
-  
-  </ul>
-  
-  </nav>
-</header>
+<%- include('partials/profileheader') -%>
 
     <h1 style = "text-align:center; margin-top:7rem;"> 
       Legal Roomies Questions 
@@ -142,17 +43,210 @@
     </section>
 
 
+<!---------------TRY OUT SECTION ------------------->
+
+<!--Section: Newsfeed-->
+<section>
+  <div class="card" style="max-width: 42rem">
+    <% for(let i=0; i  < questions.length; i++) {%>
+    <div class="card-body">
+      <!-- Data -->
+      
+      <div class="d-flex mb-3">
+        <a href="">
+          <img src="<%= questions[i].profileImage %>" class="border rounded-circle me-2"
+            alt="Avatar" style="height: 40px" />
+        </a>
+        <div>
+          <a href="" class="text-dark mb-0">
+            <strong><%= questions[i].name %></strong>
+          </a>
+          <a href="" class="text-muted d-block" style="margin-top: -6px">
+            <small>10h</small>
+          </a>
+        </div>
+      </div>
+      <!-- Description -->
+      <div>
+        <h1> <%= questions[i].title %> </h1>
+        <p>
+          <%= questions[i].question_body %> 
+        </p>
+      </div>
+    </div>
+  
+    <!-- Media -->
+    <div class="bg-image hover-overlay ripple rounded-0" data-mdb-ripple-color="light">
+      <img src="<%= questions[i].image%>" class="w-100" />
+      <a href="#!">
+        <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
+      </a>
+    </div>
+    <!-- Media -->
+    <!-- Interactions -->
+    <div class="card-body">
+      <!-- Reactions -->
+      <div class="d-flex justify-content-between mb-3">
+        <div>
+          <a href="">
+            <i class="fas fa-thumbs-up text-primary"></i>
+            <i class="fas fa-heart text-danger"></i>
+            <span><%= questions[i].likes %></span>
+          </a>
+        </div>
+        <div>
+          <a href="" class="text-muted"> 8 comments </a>
+        </div>
+      </div>
+      <!-- Reactions -->
+
+      <!-- Buttons -->
+      <div class="d-flex justify-content-between text-center border-top border-bottom mb-4">
+        <form class="likeIcon" action="/question/addOneLike/<%=questions[i]._id %>?_method=PUT" method="POST">
+          
+          <button type="submit" class="btn btn-link btn-lg" data-mdb-ripple-color="dark">
+            <i class="fas fa-like-alt me-2"></i> Like
+          </button>
+      </form>
+        <button type="button" class="btn btn-link btn-lg" data-mdb-ripple-color="dark">
+          <i class="fas fa-comment-alt me-2"></i>Comment
+        </button>
+        <button type="button" class="btn btn-link btn-lg" data-mdb-ripple-color="dark">
+          <i class="fas fa-share me-2"></i>Share
+        </button>
+      </div>
+      <!-- Buttons -->
+
+      <!-- Comments -->
+
+      <!-- Input -->
+      <div class="d-flex mb-3">
+        <a href="">
+          <img src="https://mdbcdn.b-cdn.net/img/new/avatars/18.webp" class="border rounded-circle me-2"
+            alt="Avatar" style="height: 40px" />
+        </a>
+        <div class="form-outline w-100">
+          <textarea class="form-control" id="textAreaExample" rows="2"></textarea>
+          <label class="form-label" for="textAreaExample">Write a comment</label>
+        </div>
+      </div>
+      <!-- Input -->
+
+      <!-- Answers -->
+
+      <!-- Single answer -->
+      <div class="d-flex mb-3">
+        <a href="">
+          <img src="https://mdbcdn.b-cdn.net/img/new/avatars/8.webp" class="border rounded-circle me-2"
+            alt="Avatar" style="height: 40px" />
+        </a>
+        <div>
+          <div class="bg-light rounded-3 px-3 py-1">
+            <a href="" class="text-dark mb-0">
+              <strong>Malcolm Dosh</strong>
+            </a>
+            <a href="" class="text-muted d-block">
+              <small>Lorem ipsum dolor sit amet consectetur,
+                adipisicing elit. Natus, aspernatur!</small>
+            </a>
+          </div>
+          <a href="" class="text-muted small ms-3 me-2"><strong>Like</strong></a>
+          <a href="" class="text-muted small me-2"><strong>Reply</strong></a>
+        </div>
+      </div>
+
+      <!-- Single answer -->
+      <div class="d-flex mb-3">
+        <a href="">
+          <img src="https://mdbcdn.b-cdn.net/img/new/avatars/5.webp" class="border rounded-circle me-2"
+            alt="Avatar" style="height: 40px" />
+        </a>
+        <div>
+          <div class="bg-light rounded-3 px-3 py-1">
+            <a href="" class="text-dark mb-0">
+              <strong>Rhia Wallis</strong>
+            </a>
+            <a href="" class="text-muted d-block">
+              <small>Et tempora ad natus autem enim a distinctio
+                quaerat asperiores necessitatibus commodi dolorum
+                nam perferendis labore delectus, aliquid placeat
+                quia nisi magnam.</small>
+            </a>
+          </div>
+          <a href="" class="text-muted small ms-3 me-2"><strong>Like</strong></a>
+          <a href="" class="text-muted small me-2"><strong>Reply</strong></a>
+        </div>
+      </div>
+
+      <!-- Single answer -->
+      <div class="d-flex mb-3">
+        <a href="">
+          <img src="https://mdbcdn.b-cdn.net/img/new/avatars/6.webp" class="border rounded-circle me-2"
+            alt="Avatar" style="height: 40px" />
+        </a>
+        <div>
+          <div class="bg-light rounded-3 px-3 py-1">
+            <a href="" class="text-dark mb-0">
+              <strong>Marcie Mcgee</strong>
+            </a>
+            <a href="" class="text-muted d-block">
+              <small>
+                Officia asperiores autem sit rerum architecto a
+                deserunt doloribus obcaecati, velit ab at, ad
+                delectus sapiente! Voluptatibus quaerat suscipit
+                in nostrum necessitatibus illum nemo quo beatae
+                obcaecati quidem optio fugit ipsam distinctio,
+                illo repellendus porro sequi alias perferendis ea
+                soluta maiores nisi eligendi? Mollitia debitis
+                quam ex, voluptates cupiditate magnam
+                fugiat.</small>
+            </a>
+          </div>
+          <a href="" class="text-muted small ms-3 me-2"><strong>Like</strong></a>
+          <a href="" class="text-muted small me-2"><strong>Reply</strong></a>
+        </div>
+      </div>
+
+      <!-- Single answer -->
+      <div class="d-flex mb-3">
+        <a href="">
+          <img src="https://mdbcdn.b-cdn.net/img/new/avatars/10.webp" class="border rounded-circle me-2"
+            alt="Avatar" style="height: 40px" />
+        </a>
+        <div>
+          <div class="bg-light rounded-3 px-3 py-1">
+            <a href="" class="text-dark mb-0">
+              <strong>Hollie James</strong>
+            </a>
+            <a href="" class="text-muted d-block">
+              <small>Voluptatibus quaerat suscipit in nostrum
+                necessitatibus</small>
+            </a>
+          </div>
+          <a href="" class="text-muted small ms-3 me-2"><strong>Like</strong></a>
+          <a href="" class="text-muted small me-2"><strong>Reply</strong></a>
+        </div>
+      </div>
+
+      <!-- Answers -->
+
+      <!-- Comments -->
+    </div>
+    <!-- Interactions -->
+    <% } %>
+  </div>
+</section>
+<!--Section: Newsfeed-->
+
+
+
+
+
+
      
     
 
     
     
     
-<!-------Font Awesome Link---->
-<script src="https://kit.fontawesome.com/4448a8754e.js" crossorigin="anonymous"></script>
-   
-<!----External JS Link ----->
-<script src='public/js/main.js'></script>
-</body>
-
-</html>
+    <%- include('partials/footer') -%>

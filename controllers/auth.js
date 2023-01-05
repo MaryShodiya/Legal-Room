@@ -5,7 +5,7 @@ const User = require("../models/User");
 
 exports.getLogin = (req, res) => {
   if (req.user) {
-    return res.redirect("/profile");
+    return res.redirect("/editprofile");
   }
   res.render("login", {
     title: "Login",
@@ -27,15 +27,7 @@ exports.postLogin = (req, res, next) => {
   req.body.email = validator.normalizeEmail(req.body.email, {
     gmail_remove_dots: false,
   });
-  /*const token = jwt.sign(
-    { user_id: validator.getToken(req.body.user_id, email) },
-    process.env.SECRET_KEY,
-    {
-      expiresIn: "2h",
-    }
-  );
-  // save user token
-  req.body.token = token;*/
+ 
   
 
   passport.authenticate("local", (err, user, info) => {
@@ -74,7 +66,7 @@ exports.logout = (req, res) => {
 
 exports.getSignup = (req, res) => {
   if (req.user) {
-    return res.redirect("/profile");
+    return res.redirect("/");
   }
   res.render("signup", {
     title: "Create Account",
@@ -126,7 +118,7 @@ exports.postSignup = (req, res, next) => {
           if (err) {
             return next(err);
           }
-          res.redirect("/profile");
+          res.redirect("/editprofile");
         });
       });
     }

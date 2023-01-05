@@ -1,7 +1,8 @@
 const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
 const Profile = require("../models/Profile"); 
-
+const Comment = require("../models/Comment");
+const User = require("../models/User");
 
 
 
@@ -13,70 +14,62 @@ makePost:  (req, res) => {
     res.render('postform.ejs')
 },
 
-editProfile:  (req, res) => {
-  res.render('editprofile.ejs', )
-},
-
-/*getChatroom: async (req, res, next) => {
+editProfile:  async (req, res) => {
   try{
-  const chats = await Chat.findById(req.params.id);
-  const profile = await Profile.findById(req.params.id)
-  res.render('chatroom.ejs', {
-    chats: chats, 
-    user: req.user, 
-    profile: profile,
-  });
-  res.io.emit('is_online', `${req.user} has joined the chat`)
+    const profile = await Profile.findOne({ user: req.user.id })
+  res.render('editprofile.ejs', { profile: profile })
   } catch (err) {
-    console.log(err);
+    console.log(err)
   }
-},*/
-
+},
 
 
 getProfile: async (req, res) => {
     try {
       const posts = await Post.find({ user: req.user.id });
-      const profile = await Profile.findOne({ user: req.user.id });
+      const profile = await Profile.findOne({ user: req.user.id  });
 
-      res.render("profile.ejs", { 
-        posts: posts, 
-        user: req.user, 
-        profile: profile });
+      res.render("profile.ejs", {  posts: posts, user: req.user,  profile: profile });
     } catch (err) {
       console.log(err);
     }
   },
   getFeed: async (req, res) => {
     try {
+    
       const posts = await Post.find().sort({ createdAt: "desc" }).lean();
-      res.render("feed.ejs", { posts: posts, user: req.user });
-    } catch (err) {
-      console.log(err);
-    }
-  },
-  getPost: async (req, res) => {
-    try {
-      const post = await Post.findById(req.params.id);
-      res.render("post.ejs", { post: post, user: req.user });
+      /*const profile = await Profile.findOne({ user: req.user.id });
+      const comments = await Comment.find().sort({ createdAt: "desc"}).lean();*/
+      res.render("feed.ejs", { posts: posts});
     } catch (err) {
       console.log(err);
     }
   },
 
-  /*postChatMessage: async (req, res) => {
-    try{
-     await Chat.create({
-       message: req.body.message,
-       user: req.user.id,
-     });
-     console.log (" A Message was sent");
-     res.redirect ("/messages");
-     console.log(req.body.message)
+  getPost: async (req, res) => {
+    try { 
+    const currentUser = await Profile.findOne({ user: req.user.id });
+  if (!currentUser) 
+    return res.status(404).json({error: 'User not found'});
+    if(currentUser){
+      const posts = await Post.findById({ user: currentUser.id })
+      res.render("post.ejs", { posts: posts, user: currentUser}) 
+    }
+    } catch (err) {
+      console.log(err);
+    }
+  },
+
+    
+    /*try {
+      const post = await Post.findById(req.params.id);
+      const comments = await Comment.find({post: req.params.id}).sort({ createdAt: "desc"}).lean();
+      res.render("post.ejs", { post: post, user:req.user, comments: comments });
     } catch (err) {
       console.log(err);
     }
   },*/
+
  
   postEditProfile: async (req, res) => {
     try {

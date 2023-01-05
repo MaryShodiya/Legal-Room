@@ -35,11 +35,11 @@ window.onscroll = function() {scrollFunction()}
 function scrollFunction() {
   if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
     document.querySelector(".navigationbar").style.top = "0";
-   document.querySelector(".navigationbar_two").style.top = "-80px";
+   document.querySelector(".navigationbar_two").style.top = "-50px";
     
   } else {
     
-   document.querySelector(".navigationbar").style.top = "-80px";
+  document.querySelector(".navigationbar").style.top = "-50px";
  document.querySelector(".navigationbar_two").style.top = "0";
   }
 }
@@ -142,4 +142,8 @@ async function disLike(){
 
 
 
+
+function showpara(){
+  document.querySelector(".hidden_paragraph").style.display = "block"
+}
 

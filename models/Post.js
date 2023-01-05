@@ -12,11 +12,11 @@ const PostSchema = new mongoose.Schema({
   },
   caption: {
     type: String,
-    required: true,
+    require: true,
   },
   likes: {
     type: Number,
-    required: true,
+    require: true,
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,

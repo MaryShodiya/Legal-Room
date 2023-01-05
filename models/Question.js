@@ -7,7 +7,7 @@ const QuestionSchema = new mongoose.Schema({
   },
   image: {
     type: String,
-    require: true,
+  
   },
   cloudinaryId: {
     type: String,
@@ -21,9 +21,10 @@ const QuestionSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  user: {
+  
+  profile: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
+    ref: "Profile",
   },
   createdAt: {
     type: Date,
