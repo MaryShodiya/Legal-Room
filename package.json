@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon server.js",
     "start": "node server.js",
-    "build-css": "tailwindcss -i src/output.css -o public/output.css --watch",
+    "build-css": "tailwindcss -i src/output.css -o public/output.css ",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
