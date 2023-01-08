@@ -45,65 +45,106 @@
   </head>
   <body>
 
-<!--Section: News of the day-->
-<div class="row gx-5">
-  <div class="col-md-6 mb-4">
-    <div class="bg-image hover-overlay ripple shadow-2-strong rounded-5" data-mdb-ripple-color="light">
-      <img src="<%= post.image%>" class="img-fluid" style="width:50rem; height:40rem;" />
-      <a href="#!">
-        <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-      </a>
-    </div>
-  </div>
 
-  <div class="col-md-6 mb-4">
-    
-    <span class="badge bg-danger px-2 py-1 shadow-1-strong mb-3"> 
-     
-      <%= profile.name %>
-     
-    </span>
-    <h4><strong>Facilis consequatur eligendi</strong></h4>
-    <p class="text-muted">
-      <%= post.caption %>
-    </p>
-    <!---<form class="col-1" action="/post/likePost/<%= post.id %>?_method=PUT" method="POST">
-    <button type="button" class="btn btn-primary fa fa-heart" type="submit"></button>
-    </form>---->
-    <!--<h3 class="col-3"> <%= post.likes %></h3>--->
-        <%if(post.user == user.id){ %>
-        <form action="/post/deletePost/<%= post.id %>?_method=DELETE" method="POST" class="col-3">
-          <button class="btn btn-primary fa fa-trash" type="submit"></button>
-        </form>
-        <%}%>
 
     
+      <div class="d-flex p-3 border-bottom">
+        <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img (29).webp" class="rounded-circle"
+          height="50" alt="Avatar" loading="lazy" />
+        <div class=" w-100 ps-3">
+          <div>
+            <a href="">
+              <h6 class="text-body">
+               <%= profile.name %>
+                <span class="small text-muted font-weight-normal">@<%=question.userName %></span>
+                <span class="small text-muted font-weight-normal"> • </span>
+                <span class="small text-muted font-weight-normal"><%= question.createdAt %></span>
+                <span><i class="fas fa-angle-down float-end"></i></span>
+              </h6>
+            </a>
+            <h5><%= question.title %></h5>
+            <p style="line-height: 1.2;">
+                 <%= question.question_body %></p>
+            
+                 <% if (question.image != String.empty) { %>
+                  <div class="row gx-5">
+                    <div class="col-md-6 mb-4">
+                      <div class="bg-image hover-overlay ripple shadow-2-strong rounded-5" data-mdb-ripple-color="light">
+                        <img src="<%= question.image%>" class="img-fluid" style="width:50rem; height:40rem;" />
+                      </div>
+                    </div>
+                    <% } %>
 
-        <!--<div class="mt-5">
-          <h2>Add a comment</h2>
-          <form action="/comment/createComment/<%=post._id%>" method="POST">
-            <div class="mb-3">
-                <label for="comment" class="form-label">Comment</label>
-                <input type="text" class="form-control" id="comment" name="comment">
-            </div>
+
+            <ul class="list-unstyled d-flex justify-content-between mb-0 pe-xl-5">
+              <button type="button" class="btn btn-link btn-lg" data-mdb-ripple-color="dark">
+                <a href="#"><i class="far fa-comment"></i> </a>
+              </button>
+            
+              <li><i class="far fa-heart"></i><span class="small ps-2">35</span></li>
+              <li>
+                <i class="fas fa-trash"></i>
+              </li>
+            </ul>
+
+         
+        <form action="/comment/createComment/<%=question._id%>" method="POST">
+          <div class="form-outline mb-4">
+          <textarea class="form-control" id="comment" name="comment" rows="3"  placeholder="Enter your Reply"></textarea>
+          </div>
+            
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>
+          </div>
+          <br/>
+         <section class="container">
+          <% for(var i=0; i<comments.length; i++) {%>
+      <div class="d-flex mb-3">
+        <a href="">
+          <img src="https://mdbcdn.b-cdn.net/img/new/avatars/5.webp" class="border rounded-circle me-2"
+            alt="Avatar" style="height: 40px" />
+        </a>
+        <div>
+          <div class="bg-light rounded-3 px-3 py-1">
+            <a href="" class="text-dark mb-0">
+              <strong>Rhia Wallis</strong>
+            </a>
+            <a href="" class="text-muted d-block">
+              <small>  <%= comments[i].comment%></small>
+            </a>
+          </div>
+          <a href="" class="text-muted small ms-3 me-2"><strong>Like</strong></a>
+          <a href="" class="text-muted small me-2"><strong>Reply</strong></a>
         </div>
-        <ul>
-          <% for(var i=0; i < comments.length; i++) {%>
-            <li class="col-6 justify-content-between mt-5">
-              <%= comments[i].comment%>
-            </li>
-          <% } %>
-        </ul>--->
+      </div>
+      <% } %>
+
+    </section>
 
 
-        <div class="col-6 mt-5">
-          <a class="btn btn-primary" href="/profile">Return to Profile</a>
-          <a class="btn btn-primary" href="/feed">Return to Feed</a>
+
+
+
+
+
         </div>
-  </div>
-</div>
+      </div>
+
+
+      <div class="col-6 mt-5">
+        <a class="btn btn-primary" href="/profile">Return to Profile</a>
+        <a class="btn btn-primary" href="/feed">Return to Feed</a>
+      </div>
+
+
+
+
+
+
+
+
+
+
 
 <!-- MDB -->
 <script

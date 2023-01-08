@@ -9,9 +9,9 @@ const CommentSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  post: {
+  question: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Post",
+    ref: "Question",
   },
   createdAt: {
     type: Date,
@@ -26,5 +26,12 @@ const CommentSchema = new mongoose.Schema({
     ref: "Profile", 
   }
 });
+
+/* const subCommentSchema = new mongoose.Schema({
+  comment: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref:
+  }
+})*/
 
 module.exports = mongoose.model("Comment", CommentSchema);

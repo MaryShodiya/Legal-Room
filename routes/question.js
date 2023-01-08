@@ -9,7 +9,9 @@ const { ensureAuth, ensureGuest } = require("../middleware/auth");
 
 router.get("/:id", ensureAuth, questionsController.getQuestion)
 
+
 router.post("/addQuestion", upload.single("file"), questionsController.addQuestion);
+
 
 router.put("/addOneLike/:id", questionsController.addOneLike);
 

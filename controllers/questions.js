@@ -1,60 +1,110 @@
-
 const cloudinary = require("../middleware/cloudinary");
 const Question = require("../models/Question");
 const Profile = require("../models/Profile");
+const Comment = require("../models/Comment");
 
 
 
 module.exports = {
 
-  askQuestion: async (req, res) => {
-    try {
-      const questions = await Question.find({ user: req.user.id });
-      res.render("ask.ejs", { questions: questions, user: req.user });
-    } catch (err) {
-      console.log(err);
-    }
-  },
+
+askQuestion:  (req, res) => {
+  res.render('ask.ejs')
+},
+
+
+
+
+editProfile:  async (req, res) => {
+try{
+  const profile = await Profile.findOne({ user: req.user.id })
+res.render('editprofile.ejs', { profile: profile })
+} catch (err) {
+  console.log(err)
+}
+},
+
+
+getProfile: async (req, res) => {
+  try {
+    const questions = await Question.find({ user: req.user.id });
+    const profile = await Profile.findOne({ user: req.user.id  });
+
+    res.render("profile.ejs", {  questions: questions, user: req.user,  profile: profile });
+  } catch (err) {
+    console.log(err);
+  }
+},
+
+
 
   getQuestions: async (req, res) => {
     try {
       const questions = await Question.find().sort({ createdAt: "desc" }).lean();
-      res.render("question.ejs", { questions: questions, user: req.user });
+  
+      console.log(questions)
+      res.render("question.ejs", { questions: questions, user: req.user});
     } catch (err) {
       console.log(err);
     }
   },
 
   getQuestion: async (req, res) => {
+    
     try {
       const question = await Question.findById(req.params.id);
-      const profile = await Question.find().populate('name', 'profileImage')
-      res.render("question.ejs", { question: question, user: req.user, profile});
-      console.log(profile)
+      const comments= await Comment.find({question:req.params.id}).sort({createdAt:"desc"}).lean()
+      const profile = await Profile.findOne({ user: req.user.id  });
+      res.render("post.ejs", { question: question, user: req.user, profile: profile , comments:comments });
+      
     } catch (err) {
       console.log(err);
     }
   },
+
+ 
    
 
   addQuestion: async (req, res) => {
     try {
       // Upload image to cloudinary
-      const result = await cloudinary.uploader.upload(req.file.path);
-
+  
+      
+      if (req.file !==  undefined) {
+        const result = await cloudinary.uploader.upload(req.file.path)
+      
       await Question.create({
         title: req.body.title,
        image: result.secure_url,
         cloudinaryId: result.public_id,
         question_body: req.body.question_body,
         likes: 0,
+        userName: req.user.userName,
         user: req.user.id,
+        createdAt:result.createdAt
+      
       });
+    } else{ const result =  String;
+      await Question.create({
+        title: req.body.title,
+       image: result.secure_url,
+        cloudinaryId: result.public_id,
+        question_body: req.body.question_body,
+        likes: 0,
+        userName: req.user.userName,
+        user: req.user.id,
+        createdAt: result.createdAt
+      
+      });
+    
+    }
+    
       console.log("Question has been added!");
-      res.redirect("/questions");
+      res.redirect("/profile");
     } catch (err) {
       console.log(err);
     }
+  
   },
 
   addOneLike: async (req, res) => {
@@ -66,7 +116,7 @@ module.exports = {
         }
       );
       console.log("Likes +1");
-      res.redirect("/questions")
+      res.redirect(`/question/${req.params.id}`)
     } catch (err) {
       console.log(err);
     }
@@ -80,10 +130,13 @@ module.exports = {
       await cloudinary.uploader.destroy(question.cloudinaryId);
       // Delete post from db
       await Question.remove({ _id: req.params.id });
+      if (question.cloudinaryId != String) {
+        await cloudinary.uploader.destroy(question.cloudinaryId);
+      }
       console.log("Deleted Question");
-      res.redirect("/questions");
+      res.redirect("/profile");
     } catch (err) {
-      res.redirect("/questions");
+      res.redirect("/profile");
     }
   },
 };

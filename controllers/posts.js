@@ -14,14 +14,14 @@ makePost:  (req, res) => {
     res.render('postform.ejs')
 },
 
-editProfile:  async (req, res) => {
+/*editProfile:  async (req, res) => {
   try{
     const profile = await Profile.findOne({ user: req.user.id })
   res.render('editprofile.ejs', { profile: profile })
   } catch (err) {
     console.log(err)
   }
-},
+},*/
 
 
 getProfile: async (req, res) => {

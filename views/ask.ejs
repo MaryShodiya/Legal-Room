@@ -34,18 +34,21 @@
             <h1 class="question-header text-center"> <strong style="color:mediumslateblue">Ask a Question </strong></h1> <br/>
             <div class="block rounded-lg shadow-lg bg-white px-6 py-12 md:px-12">
              
+
               <form action="/question/addQuestion" enctype="multipart/form-data" method="POST">
-      
+               
                 <label for="questionHeader"> Title </label>  
               <input type="text" class="input_box" placeholder="Title of the Question" name="title" id="title">
                <br>
               <label for="question"> Body of The Question</label> 
                <textarea class="questionBody" name="question_body" id="question_body" placeholder="Start your question with Who, Where, How, What, Why"></textarea>
+              
+   
                 <div class="mb-9">
                <label for="imgUpload" class="form-label"> Upload Image(Optional)</label>
                <p> <small>Add an image to your question to describe what your question is about</small></p>
                <input type="file" class="form-control" id="imageUpload" name="file">
-               </div>
+               </div> 
                <div class="mb-3">
 
                 <p class="md:space-x-1 space-y-1 md:space-y-0 mb-8">
@@ -57,7 +60,7 @@
                   </button>
                 </p>
       
-               
+              
             </form>
 
             </div>
