@@ -19,7 +19,8 @@ const server = app.listen(process.env.PORT, ()=>{
 const io = require('socket.io')(server) //connect server to socket.io
 
 
-require('dotenv').config({path: './config/.env'}) //database string
+const dotenv = require('dotenv')
+dotenv.config({path: './config/.env'}) //database string
 
 
 // Passport config
@@ -30,37 +31,6 @@ require('./config/passport')(passport)
 connectDB()
 
 
-/*socketio.on('connection', (socket) => {
-    console.log("connected to socket")
-    socket.on('setup', (userName) => {
-        socket.join(userName._id)
-        console.log(`${userName.firstName} is online`)
-        socket.emit('connected')
-    })
-    
-socketio.on('join chat', (room) => {
-    socket.join(room._id)
-    console.log(`User joined chat with room : ${room}`)
-})
-
-})*/
-
-
-/*io.sockets.on('connection', function(socket) {
-    socket.on('username', function(username) {
-        socket.username = username;
-       io.emit('is_online', '🔵 <i>' + socket.username + ' join the chat..</i>');
-    });
-
-    socket.on('disconnect', function(username) {
-        io.emit('is_online', '🔴 <i>' + socket.username + ' left the chat..</i>');
-    })
-
-    socket.on('chat_message', function(message) {
-        io.emit('chat_message', '<strong>' + socket.username + '</strong>: ' + message);
-    });
-
-});*/
 
 
 
