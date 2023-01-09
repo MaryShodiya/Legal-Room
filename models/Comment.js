@@ -21,17 +21,20 @@ const CommentSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
   },
+  createdBy: {
+    type: String,
+    ref: "User"
+  },
+  createdById: { 
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User"
+  },
   profile: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Profile", 
   }
 });
 
-/* const subCommentSchema = new mongoose.Schema({
-  comment: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref:
-  }
-})*/
 
 module.exports = mongoose.model("Comment", CommentSchema);
+

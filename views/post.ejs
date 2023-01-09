@@ -52,7 +52,7 @@
         <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img (29).webp" class="rounded-circle"
           height="50" alt="Avatar" loading="lazy" />
         <div class=" w-100 ps-3">
-          <div>
+         <div>
             <a href="">
               <h6 class="text-body">
                <%= profile.name %>
@@ -77,7 +77,7 @@
 
 
             <ul class="list-unstyled d-flex justify-content-between mb-0 pe-xl-5">
-              <button type="button" class="btn btn-link btn-lg" data-mdb-ripple-color="dark">
+              <button type="button" class="btn btn-link btn-lg" data-mdb-ripple-color="dark" id="dropdown_comment">
                 <a href="#"><i class="far fa-comment"></i> </a>
               </button>
             
@@ -87,15 +87,17 @@
               </li>
             </ul>
 
-         
+        
         <form action="/comment/createComment/<%=question._id%>" method="POST">
           <div class="form-outline mb-4">
-          <textarea class="form-control" id="comment" name="comment" rows="3"  placeholder="Enter your Reply"></textarea>
-          </div>
+          <textarea class="form-control hover" id="comment" name="comment" rows="3"  placeholder="Enter your Reply"></textarea>
+          
+            </div>
+            <button type="submit hover" class="btn btn-primary">Submit</button>
             
-            <button type="submit" class="btn btn-primary">Submit</button>
           </form>
-          </div>
+        
+        </div>
           <br/>
          <section class="container">
           <% for(var i=0; i<comments.length; i++) {%>
@@ -107,16 +109,18 @@
         <div>
           <div class="bg-light rounded-3 px-3 py-1">
             <a href="" class="text-dark mb-0">
-              <strong>Rhia Wallis</strong>
+              <strong><%= comments[i].createdBy %></strong>
             </a>
             <a href="" class="text-muted d-block">
-              <small>  <%= comments[i].comment%></small>
+              <small><%= comments[i].comment %></small>
             </a>
+           </div>
+            <a href="" class="text-muted small ms-3 me-2"><strong>Like</strong></a>
+          
+            <a href="" type="submit" class="text-muted small me-2"><strong>Reply</strong></a>
           </div>
-          <a href="" class="text-muted small ms-3 me-2"><strong>Like</strong></a>
-          <a href="" class="text-muted small me-2"><strong>Reply</strong></a>
         </div>
-      </div>
+        
       <% } %>
 
     </section>
@@ -126,14 +130,15 @@
 
 
 
+       </div>
+       </div>
+      
+      
 
-        </div>
-      </div>
 
-
-      <div class="col-6 mt-5">
-        <a class="btn btn-primary" href="/profile">Return to Profile</a>
-        <a class="btn btn-primary" href="/feed">Return to Feed</a>
+      <div class="d-flex justify-center">
+        <a class="btn btn-primary ms-3 me-2" href="/profile">Return to Profile</a> <br/>
+        <a class="btn btn-primary me-2" href="/feed">Return to Feed</a>
       </div>
 
 

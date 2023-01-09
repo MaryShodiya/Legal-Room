@@ -2,6 +2,7 @@ const cloudinary = require("../middleware/cloudinary");
 const Question = require("../models/Question");
 const Profile = require("../models/Profile");
 const Comment = require("../models/Comment");
+const SubComment = require("../models/SubComment");
 
 
 
@@ -52,10 +53,20 @@ getProfile: async (req, res) => {
   getQuestion: async (req, res) => {
     
     try {
+     Date.prototype.yyyymmdd = function() {
+       const date = this.getDate();
+       const month = this.getMonth();
+       return [this.getFullYear(),
+      (date > 9 ? '' : '0') + date,
+      (month > 9 ? '' : '0') + month].join('')
+     }
+
+
       const question = await Question.findById(req.params.id);
-      const comments= await Comment.find({question:req.params.id}).sort({createdAt:"desc"}).lean()
+      const comments= await Comment.find({question:req.params.id}).sort({createdAt:"asc"}).lean()
+      const subcomment = await SubComment.find({comments:req.params.id}).sort({createdAt:"desc"}).lean()
       const profile = await Profile.findOne({ user: req.user.id  });
-      res.render("post.ejs", { question: question, user: req.user, profile: profile , comments:comments });
+      res.render("post.ejs", { question: question, user: req.user, profile: profile , comments:comments, subcomment:subcomment });
       
     } catch (err) {
       console.log(err);

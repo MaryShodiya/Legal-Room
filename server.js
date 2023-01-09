@@ -11,6 +11,7 @@ const connectDB = require('./config/database')
 const mainRoutes = require('./routes/main')
 const postRoutes = require('./routes/posts')
 const commentRoutes = require("./routes/comments");
+const subcommentRoutes = require("./routes/subcomments")
 const questionRoutes = require('./routes/question')
 const server = app.listen(process.env.PORT, ()=>{
     console.log(`Server running on port, you better catch it!!`)
@@ -73,6 +74,7 @@ app.use('/', mainRoutes)
 app.use('/post', postRoutes)
 app.use('/question', questionRoutes)
 app.use("/comment", commentRoutes);
+app.use('/subcomment', subcommentRoutes);
 
 
 
