@@ -13,11 +13,9 @@ const postRoutes = require('./routes/posts')
 const commentRoutes = require("./routes/comments");
 const subcommentRoutes = require("./routes/subcomments")
 const questionRoutes = require('./routes/question')
-const server = app.listen(process.env.PORT, ()=>{
-    console.log(`Server running on port, you better catch it!!`)
-})
 
-const io = require('socket.io')(server) //connect server to socket.io
+
+
 
 
 const dotenv = require('dotenv')
@@ -44,13 +42,6 @@ app.use(express.static('public'))
 app.use(express.urlencoded({ extended:true})) //parse request path
 app.use(express.json()) //parse JSON response
 app.use(logger('dev'))
-
-//connect express to socket
-app.use(function(req, res, next){
-    res.io = io;
-    next();
-  });
-
 app.use(methodOverride("_method"))
 
 // Sessions
@@ -76,5 +67,7 @@ app.use('/question', questionRoutes)
 app.use("/comment", commentRoutes);
 app.use('/subcomment', subcommentRoutes);
 
-
+app.listen(process.env.PORT, ()=>{
+    console.log(`Server running on port, you better catch it!!`)
+})
 
