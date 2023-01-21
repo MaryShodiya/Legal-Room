@@ -7,11 +7,11 @@ The Legal Room Project is a full stack application built with Node js and Expres
 
 <img align="right" width="300" src="public/images/demo1.png" alt="legal room demo" />
 
-<img align="left" width="300" src="public/images/demo2.jpeg" alt="legal room demo" />
+<img align="right" width="300" src="public/images/demo2.jpeg" alt="legal room demo" />
 
 <img align="right" width="300" src="public/images/demo3.jpeg" alt="legal room demo" />
 
-<img align="left" width="300" src="public/images/demo4.jpeg" alt="legal room demo" />
+<img align="right" width="300" src="public/images/demo4.jpeg" alt="legal room demo" />
 
 ### The Process
 
