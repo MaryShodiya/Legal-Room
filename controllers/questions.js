@@ -3,6 +3,7 @@ const Question = require("../models/Question");
 const Profile = require("../models/Profile");
 const Comment = require("../models/Comment");
 const SubComment = require("../models/SubComment");
+const moments = require("../controllers/moment")
 
 
 
@@ -31,7 +32,7 @@ getProfile: async (req, res) => {
     const questions = await Question.find({ user: req.user.id });
     const profile = await Profile.findOne({ user: req.user.id  });
 
-    res.render("profile.ejs", {  questions: questions, user: req.user,  profile: profile });
+    res.render("profile.ejs", {  questions: questions, user: req.user,  profile: profile, moments });
   } catch (err) {
     console.log(err);
   }
@@ -44,7 +45,7 @@ getProfile: async (req, res) => {
       const questions = await Question.find().sort({ createdAt: "desc" }).lean();
   
       console.log(questions)
-      res.render("question.ejs", { questions: questions, user: req.user});
+      res.render("question.ejs", { questions: questions, user: req.user, moments:moments});
     } catch (err) {
       console.log(err);
     }
@@ -53,20 +54,14 @@ getProfile: async (req, res) => {
   getQuestion: async (req, res) => {
     
     try {
-     Date.prototype.yyyymmdd = function() {
-       const date = this.getDate();
-       const month = this.getMonth();
-       return [this.getFullYear(),
-      (date > 9 ? '' : '0') + date,
-      (month > 9 ? '' : '0') + month].join('')
-     }
+    
 
 
-      const question = await Question.findById(req.params.id);
+      const question = await Question.findById(req.params.id)
       const comments= await Comment.find({question:req.params.id}).sort({createdAt:"asc"}).lean()
       const subcomment = await SubComment.find({comments:req.params.id}).sort({createdAt:"desc"}).lean()
       const profile = await Profile.findOne({ user: req.user.id  });
-      res.render("post.ejs", { question: question, user: req.user, profile: profile , comments:comments, subcomment:subcomment });
+      res.render("post.ejs", { question: question, user: req.user, profile: profile , comments:comments, subcomment:subcomment, moments});
       
     } catch (err) {
       console.log(err);
@@ -79,7 +74,7 @@ getProfile: async (req, res) => {
   addQuestion: async (req, res) => {
     try {
       // Upload image to cloudinary
-  
+
       
       if (req.file !==  undefined) {
         const result = await cloudinary.uploader.upload(req.file.path)

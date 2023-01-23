@@ -1,12 +1,4 @@
-/*************** MAIN CSS STYLING *********************/
 
-
-
-
-
-
-
-/******* Clear fix hack *******/
 .clearfix:after {
     content: ".";
     display: block;

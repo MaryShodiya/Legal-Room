@@ -18,9 +18,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet">
   
   <!--EXTERNAL CSS LINKS---> 
-  <link rel="stylesheet" href="public/css/reset.css"/>
-  <link rel="stylesheet" href="public/css/normalize.css"/>
-  <link rel="stylesheet" href="public/css/style.css"/>
+  <link rel="stylesheet" src="public/css/reset.css"/>
+  <link rel="stylesheet" src="public/css/normalize.css"/>
+  <link rel="stylesheet" src="public/css/style.css"/>
   
   
   
@@ -41,7 +41,7 @@
   />
   
   
-  <link rel="stylesheet" href="public/css/output.css" type="text/css" />
+  <link rel="stylesheet" src="public/css/output.css" type="text/css" />
   </head>
   <body>
 
@@ -58,7 +58,7 @@
                <%= profile.name %>
                 <span class="small text-muted font-weight-normal">@<%=question.userName %></span>
                 <span class="small text-muted font-weight-normal"> • </span>
-                <span class="small text-muted font-weight-normal"><%= question.createdAt %></span>
+                <span class="small text-muted font-weight-normal"><%= moments(question.createdAt).fromNow() %></span>
                 <span><i class="fas fa-angle-down float-end"></i></span>
               </h6>
             </a>
@@ -158,8 +158,7 @@ type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.
 <!------Font Awesome Link-->
 <script src="https://kit.fontawesome.com/4448a8754e.js" crossorigin="anonymous"></script>
 
-<!-------External JS LInk---->
-<script src="public/js/main.js"></script>
+
 </body>
 </html>
 
