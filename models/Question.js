@@ -10,6 +10,11 @@ const QuestionSchema = new mongoose.Schema({
     require: false
   
   },
+  document: {
+    type: String,
+    required: false
+  },
+  
   cloudinaryId: {
     type: String,
     require: true,
@@ -19,6 +24,10 @@ const QuestionSchema = new mongoose.Schema({
     required: true,
   },
   likes: {
+    type: Number,
+    required: true,
+  },
+  dislikes: {
     type: Number,
     required: true,
   },

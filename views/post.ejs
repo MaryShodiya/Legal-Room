@@ -47,23 +47,23 @@
 
 
 
-    
+       <section class="container text-black" style="margin-top: 2rem; padding: 1.5rem;box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;">
       <div class="d-flex p-3 border-bottom">
         <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img (29).webp" class="rounded-circle"
           height="50" alt="Avatar" loading="lazy" />
-        <div class=" w-100 ps-3">
+        <div class=" w-100 h-100 ps-3">
          <div>
             <a href="">
-              <h6 class="text-body">
+              <h6 class="text-warning">
                <%= profile.name %>
-                <span class="small text-muted font-weight-normal">@<%=question.userName %></span>
-                <span class="small text-muted font-weight-normal"> • </span>
-                <span class="small text-muted font-weight-normal"><%= moments(question.createdAt).fromNow() %></span>
+                <span class="small text-warning font-weight-normal">@<%=question.userName %></span>
+                <span class="small text-secondary font-weight-normal"> • </span>
+                <span class="small text-secondary font-weight-normal"><%= question.createdAt %></span>
                 <span><i class="fas fa-angle-down float-end"></i></span>
               </h6>
             </a>
             <h5><%= question.title %></h5>
-            <p style="line-height: 1.2;">
+            <p style="line-height: 1.2; ">
                  <%= question.question_body %></p>
             
                  <% if (question.image != String.empty) { %>
@@ -77,23 +77,33 @@
 
 
             <ul class="list-unstyled d-flex justify-content-between mb-0 pe-xl-5">
-              <button type="button" class="btn btn-link btn-lg" data-mdb-ripple-color="dark" id="dropdown_comment">
-                <a href="#"><i class="far fa-comment"></i> </a>
-              </button>
-            
-              <li><i class="far fa-heart"></i><span class="small ps-2">35</span></li>
-              <li>
-                <i class="fas fa-trash"></i>
-              </li>
+
+              <form  action="/question/addOneLike/<%= question.id %>?_method=PUT" method="POST">
+              <button type="submit" id="" style="background: none; padding: 0px; border: none;"> <li><i class="far fa-thumbs-up"> <span class="small ps-2"> <%= question.likes %> </span> </i> </li> </button>
+              </form>
+
+              <form  action="/question/addDislike/<%= question.id %>?_method=PUT" method="POST">
+              <button type="submit" id="" style="background: none; padding: 0px; border: none;"> <li><i class="far fa-thumbs-down"><span class="small ps-2"><%= question.dislikes %></span> </i></li> </button>
+              </form>
+
+               <li><i class="far fa-comment"><span class="small ps-2"> </span></i></li> 
+
+               <%if(question.user == user.id){ %>
+                <form
+                  action="/question/deleteQuestion/<%= question.id %>?_method=DELETE"
+                  method="POST">
+              <button type="submit" id="" style="background: none; padding: 0px; border: none;"> <li> <i class="fas fa-trash"></i> </li> </button>
+            </form>
+            <%}%>
             </ul>
 
         
         <form action="/comment/createComment/<%=question._id%>" method="POST">
-          <div class="form-outline mb-4">
-          <textarea class="form-control hover" id="comment" name="comment" rows="3"  placeholder="Enter your Reply"></textarea>
+          <div class="form-outline mt-2">
+          <textarea class="form-control" id="comment" name="comment" rows="3"  placeholder="Enter your Reply" style="resize: none"></textarea>
           
             </div>
-            <button type="submit hover" class="btn btn-primary">Submit</button>
+            <button type="submit" class="mt-4" style="background-color: blueviolet; color: white; outline:none; padding: 0.6em; border-radius: 0.5em">Submit </button>
             
           </form>
         
@@ -126,19 +136,19 @@
     </section>
 
 
-
+  </section>
 
 
 
        </div>
        </div>
       
-      
+      </div>
 
 
-      <div class="d-flex justify-center">
-        <a class="btn btn-primary ms-3 me-2" href="/profile">Return to Profile</a> <br/>
-        <a class="btn btn-primary me-2" href="/feed">Return to Feed</a>
+      <div class="d-flex justify-center " style="margin-top:1.5rem; margin-left:2.5rem">
+        <a class="btn  ms-3 me-2" href="/profile" style="background-color: blueviolet; color: white;">Return to Profile</a> <br/>
+        <a class="btn  me-2" href="/feed" style="background-color: blueviolet; color: white;">Return to Feed</a>
       </div>
 
 

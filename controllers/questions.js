@@ -3,7 +3,7 @@ const Question = require("../models/Question");
 const Profile = require("../models/Profile");
 const Comment = require("../models/Comment");
 const SubComment = require("../models/SubComment");
-const moments = require("../controllers/moment")
+const { formatDate } = require('../controllers/moments')
 
 
 
@@ -32,7 +32,7 @@ getProfile: async (req, res) => {
     const questions = await Question.find({ user: req.user.id });
     const profile = await Profile.findOne({ user: req.user.id  });
 
-    res.render("profile.ejs", {  questions: questions, user: req.user,  profile: profile, moments });
+    res.render("profile.ejs", {  questions: questions, user: req.user,  profile: profile, formatDate });
   } catch (err) {
     console.log(err);
   }
@@ -45,7 +45,7 @@ getProfile: async (req, res) => {
       const questions = await Question.find().sort({ createdAt: "desc" }).lean();
   
       console.log(questions)
-      res.render("question.ejs", { questions: questions, user: req.user, moments:moments});
+      res.render("question.ejs", { questions: questions, user: req.user, formatDate});
     } catch (err) {
       console.log(err);
     }
@@ -55,13 +55,13 @@ getProfile: async (req, res) => {
     
     try {
     
-
+     
 
       const question = await Question.findById(req.params.id)
       const comments= await Comment.find({question:req.params.id}).sort({createdAt:"asc"}).lean()
       const subcomment = await SubComment.find({comments:req.params.id}).sort({createdAt:"desc"}).lean()
       const profile = await Profile.findOne({ user: req.user.id  });
-      res.render("post.ejs", { question: question, user: req.user, profile: profile , comments:comments, subcomment:subcomment, moments});
+      res.render("post.ejs", { question: question, user: req.user, profile: profile , comments:comments, subcomment:subcomment, formatDate});
       
     } catch (err) {
       console.log(err);
@@ -82,9 +82,11 @@ getProfile: async (req, res) => {
       await Question.create({
         title: req.body.title,
        image: result.secure_url,
+       document: result.secure_url,
         cloudinaryId: result.public_id,
         question_body: req.body.question_body,
         likes: 0,
+        dislikes: 0,
         userName: req.user.userName,
         user: req.user.id,
         createdAt:result.createdAt
@@ -97,6 +99,7 @@ getProfile: async (req, res) => {
         cloudinaryId: result.public_id,
         question_body: req.body.question_body,
         likes: 0,
+        dislikes: 0,
         userName: req.user.userName,
         user: req.user.id,
         createdAt: result.createdAt
@@ -128,6 +131,22 @@ getProfile: async (req, res) => {
     }
   },
   
+  addDislike: async (req, res) => {
+    try {
+      await Question.findOneAndUpdate(
+        { _id: req.params.id },
+        {
+          $inc: { dislikes: 1 },
+        }
+      );
+      console.log("DisLikes +1");
+      res.redirect(`/question/${req.params.id}`)
+    } catch (err) {
+      console.log(err);
+    }
+  },
+
+
   deleteQuestion: async (req, res) => {
     try {
      

@@ -5,8 +5,10 @@ module.exports = multer({
   storage: multer.diskStorage({}),
   fileFilter: (req, file, cb) => {
     let ext = path.extname(file.originalname);
-    if (ext !== ".jpg" && ext !== ".jpeg" && ext !== ".png") {
+    if (ext !== ".jpg" && ext !== ".jpeg" && ext !== ".png" && ext !== ".pdf" && ext !== ".doc") {
       cb(new Error("File type is not supported"), false);
+    } else if (file.ext.toLowerCase() !== "pdf" && file.ext.toLowerCase() !== "doc") {
+      cb(new Error("File type is supported"), false);
       return;
     }
     cb(null, true);

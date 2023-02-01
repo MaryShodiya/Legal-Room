@@ -18,13 +18,17 @@ module.exports = {
 
   createComment: async (req, res) => {
     try {
-     
       await Comment.create({
         comment: req.body.comment,
         likes: 0,
+        commentNo: 0,
         question: req.params.id,
         createdBy: req.user.userName,
-      });
+      },
+      {
+        $inc: { commentNo: 1 },
+      }
+      );
       console.log("Comment has been added!");
       res.redirect("/question/"+req.params.id);
     } catch (err) {

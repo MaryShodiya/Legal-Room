@@ -5,6 +5,10 @@ const CommentSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  commentNo: {
+    type: Number,
+    required: true,
+  },
   likes: {
     type: Number,
     required: true,

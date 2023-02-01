@@ -17,7 +17,7 @@ The Legal Room Project is a full stack application built with Node js and Expres
 
 Tech Used: Ejs, CSS, Tailwind, JavaScript, Bootstrap, MERN stack
 
-This Application is basically a question and answer forum for legal practitioners. Besides coding, I am a legal professsional and this project was designed to solve one of the issues in the legal industry- an environment where legal and non professionals can seek help and support on legal issues.
+This Application is a question and answer forum for legal practitioners. Besides coding, I am a legal professsional and this project was designed to solve one of the issues in the legal industry- an environment where legal and non professionals can seek help and support on legal issues.
 
 ## Optimization
 Used Tailwind and Bootstrap to improve responsiveness of the application and for better performance. Mongo Database was preferably used to store user and question data because of its high scalability and faster performance compared to other databases.

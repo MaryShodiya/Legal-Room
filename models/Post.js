@@ -18,6 +18,10 @@ const PostSchema = new mongoose.Schema({
     type: Number,
     require: true,
   },
+  dislikes: {
+    type: Number,
+    require: true,
+  },
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
