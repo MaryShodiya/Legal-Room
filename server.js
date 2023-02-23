@@ -16,8 +16,6 @@ const questionRoutes = require('./routes/question')
 
 
 
-
-
 const dotenv = require('dotenv')
 dotenv.config({path: './config/.env'}) //database string
 
