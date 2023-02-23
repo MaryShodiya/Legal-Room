@@ -7,8 +7,6 @@ module.exports = multer({
     let ext = path.extname(file.originalname);
     if (ext !== ".jpg" && ext !== ".jpeg" && ext !== ".png" && ext !== ".pdf" && ext !== ".doc") {
       cb(new Error("File type is not supported"), false);
-    } else if (file.ext.toLowerCase() !== "pdf" && file.ext.toLowerCase() !== "doc") {
-      cb(new Error("File type is supported"), false);
       return;
     }
     cb(null, true);

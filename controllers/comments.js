@@ -2,6 +2,7 @@ const Comment = require("../models/Comment");
 const Question = require("../models/Question");
 const Profile = require("../models/Profile");
 const SubComment = require("../models/SubComment");
+const moment = require("moment")
 
 
 module.exports = {
@@ -9,8 +10,12 @@ module.exports = {
 
   writeComment:  async (req, res) => {
     try{
+      const comment = await Comment.findById(req.params.id)
       const profile = await Profile.findOne({ user: req.user.id })
-    res.render('comment.ejs', { profile: profile })
+      const commentdate = new Date(comment.createdAt)
+      const formattedDateComment = moment(commentdate).fromNow()
+      
+    res.render('comment.ejs', { profile: profile,  comment, formattedDateComment })
     } catch (err) {
       console.log(err)
     }
@@ -24,6 +29,7 @@ module.exports = {
         commentNo: 0,
         question: req.params.id,
         createdBy: req.user.userName,
+        createdAt: req.params.createdAt
       },
       {
         $inc: { commentNo: 1 },

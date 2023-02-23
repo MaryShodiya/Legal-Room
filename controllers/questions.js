@@ -3,7 +3,7 @@ const Question = require("../models/Question");
 const Profile = require("../models/Profile");
 const Comment = require("../models/Comment");
 const SubComment = require("../models/SubComment");
-const { formatDate } = require('../controllers/moments')
+const moment = require("moment")
 
 
 
@@ -32,7 +32,7 @@ getProfile: async (req, res) => {
     const questions = await Question.find({ user: req.user.id });
     const profile = await Profile.findOne({ user: req.user.id  });
 
-    res.render("profile.ejs", {  questions: questions, user: req.user,  profile: profile, formatDate });
+    res.render("profile.ejs", {  questions: questions, user: req.user,  profile: profile, });
   } catch (err) {
     console.log(err);
   }
@@ -61,7 +61,11 @@ getProfile: async (req, res) => {
       const comments= await Comment.find({question:req.params.id}).sort({createdAt:"asc"}).lean()
       const subcomment = await SubComment.find({comments:req.params.id}).sort({createdAt:"desc"}).lean()
       const profile = await Profile.findOne({ user: req.user.id  });
-      res.render("post.ejs", { question: question, user: req.user, profile: profile , comments:comments, subcomment:subcomment, formatDate});
+      const date = new Date(question.createdAt)
+      const formattedDate = moment(date).fromNow()
+      const commentdate = new Date(comments.createdAt)
+      const formattedDateComment = moment(commentdate).fromNow()
+      res.render("post.ejs", { question: question, user: req.user, profile: profile , comments:comments, subcomment:subcomment, formattedDate, formattedDateComment });
       
     } catch (err) {
       console.log(err);
@@ -82,7 +86,7 @@ getProfile: async (req, res) => {
       await Question.create({
         title: req.body.title,
        image: result.secure_url,
-       document: result.secure_url,
+       pdfUrl: result.secure_url,
         cloudinaryId: result.public_id,
         question_body: req.body.question_body,
         likes: 0,
@@ -96,6 +100,7 @@ getProfile: async (req, res) => {
       await Question.create({
         title: req.body.title,
        image: result.secure_url,
+       pdfUrl: result.secure_url,
         cloudinaryId: result.public_id,
         question_body: req.body.question_body,
         likes: 0,

@@ -10,7 +10,7 @@ const QuestionSchema = new mongoose.Schema({
     require: false
   
   },
-  document: {
+  pdfUrl: {
     type: String,
     required: false
   },
