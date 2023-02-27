@@ -3,7 +3,7 @@
 
 The Legal Room Project is a full stack application built with Node js and Express js with data stored in the MongoDB database
 
-[Tap to access the project here]https://legal-room-production.up.railway.app/)
+[Tap to access the project here](https://legal-room.onrender.com)
 
 <img align="right" width="300" src="public/images/demo1.png" alt="legal room demo" />
 
