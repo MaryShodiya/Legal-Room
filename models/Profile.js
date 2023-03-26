@@ -1,26 +1,20 @@
 const mongoose = require("mongoose");
 
 const ProfileSchema = new mongoose.Schema({
-  profileImage: {
-    type: String,
-    require: true,
-  },
+ 
   work: {
-    type: String,
-    require: true,
-  },
-  hobbies: {
-    type: String,
-    require: true
-  },
-  cloudinaryId: {
-    type: String,
-    require: true,
-  },
-  name: {
     type: String,
     required: true,
   },
+  hobbies: {
+    type: String,
+    required: true
+  },
+  cloudinaryId: {
+    type: String,
+    required: true,
+  },
+
   location: {
     type: String,
     required: true,
@@ -32,12 +26,23 @@ const ProfileSchema = new mongoose.Schema({
    user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
-    required: true
+  },
+  fullName: {
+    type: String,
+    ref: "User",
+  },
+  userName: {
+    type: String,
+     ref: "User",
   },
   lastUpdated: {
     type: Date,
     default: Date.now,
   },
+  profilePicture: {
+    type: String,
+    required: true
+  }
 });
 
 

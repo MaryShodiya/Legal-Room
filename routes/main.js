@@ -6,6 +6,7 @@ const postsController = require('../controllers/posts')
 const questionsController = require('../controllers/questions')
 const commentsController = require('../controllers/comments')
 const { ensureAuth, ensureGuest } = require('../middleware/auth')
+const upload = require("../middleware/multer");
 
 
 
@@ -18,14 +19,14 @@ router.get("/forgot", homeController.getForgotPassword);
 router.get("/ask", questionsController.askQuestion)
 router.get("/writeComment", commentsController.writeComment)
 router.get("/editprofile", questionsController.editProfile)
+router.get("/update", questionsController.getUpdate)
 router.get("/questions", questionsController.getQuestions)
 router.get("/logout", authController.logout);
 router.get("/signup", authController.getSignup);
 router.post("/signup", authController.postSignup);
 router.post("/login", authController.postLogin)
-router.post("/forgotPassword", authController.postForgotPassword); 
-
-
+router.post("/forgotPassword", authController.postForgotPassword);
+router.post("/postProfilePicture", upload.single("file"), authController.postProfilePicture) 
 
 
 module.exports = router;

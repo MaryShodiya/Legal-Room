@@ -3,6 +3,7 @@ const Post = require("../models/Post");
 const Profile = require("../models/Profile"); 
 const Comment = require("../models/Comment");
 const User = require("../models/User");
+const { type } = require("os");
 
 
 
@@ -77,15 +78,15 @@ getProfile: async (req, res) => {
       const result = await cloudinary.uploader.upload(req.file.path);
 
       await Profile.create({
-        profileImage: result.secure_url,
         cloudinaryId: result.public_id,
-        name: req.body.name,
+        profilePicture: result.secure_url,
         location: req.body.location,
-        user: req.user.id,
+        userName: req.user.userName,
         work: req.body.work,
         hobbies: req.body.hobbies,
         skills: req.body.skills,
-        user:req.user.id,
+        fullName:req.user.fullName,
+        user: req.user.id
 
       });
       console.log("Profile has been updated!");
@@ -107,6 +108,10 @@ getProfile: async (req, res) => {
         caption: req.body.caption,
         likes: 0,
         user: req.user.id,
+        name: req.body.name,
+        fullName: req.user.fullName,
+        profilePicture: req.user.ProfilePicture
+
       });
       console.log("Post has been added!");
       res.redirect("/profile");
@@ -144,5 +149,27 @@ getProfile: async (req, res) => {
       res.redirect("/profile");
     }
   },
+
+  updateProfile : async (req, res) => {
+    try{
+      
+      const result = await cloudinary.uploader.upload(req.file.path)
+    await Profile.findOneAndUpdate ({ user: req.user.id },
+        {
+          cloudinaryId: result.public_id,
+          profilePicture: result.secure_url,
+          location: req.body.location,
+          userName: req.user.userName,
+          work: req.body.work,
+          hobbies: req.body.hobbies,
+          skills: req.body.skills,
+          fullName:req.user.fullName,
+         })
+        console.log("Profile Updated")
+        res.redirect("/profile")
+    }catch (err){
+      console.log(err)
+    }
+  }
    
 };

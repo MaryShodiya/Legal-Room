@@ -1,7 +1,7 @@
 const passport = require("passport");
 const validator = require("validator");
 const User = require("../models/User");
-
+const cloudinary = require("../middleware/cloudinary");
 
 exports.getLogin = (req, res) => {
   if (req.user) {
@@ -11,6 +11,21 @@ exports.getLogin = (req, res) => {
     title: "Login",
   });
 }
+
+exports.postProfilePicture = async (req,res) => {
+  try{
+    if (req.user){
+  const result = await cloudinary.uploader.upload(req.file.path)
+  await User.create({
+    profilePicture : result.secure_url
+  })
+}
+  res.redirect("/profile")
+} catch (err) {
+  console.log(err);
+} 
+}
+
 
 
 
@@ -67,7 +82,7 @@ exports.logout = (req, res) => {
 
 exports.getSignup = (req, res) => {
   if (req.user) {
-    return res.redirect("/");
+    return res.redirect("/login");
   }
   res.render("signup", {
     title: "Create Account",
@@ -145,12 +160,14 @@ exports.postSignup = (req, res, next) => {
 
   const user = new User({
     userName: req.body.userName,
+    fullName: req.body.fullName,
+    profilePicture: req.body.profilePicture,
     email: req.body.email,
     password: req.body.password,
   });
 
   User.findOne(
-    { $or: [{ email: req.body.email }, { userName: req.body.userName }] },
+    { $or: [{ email: req.body.email }, { userName: req.body.userName, fullName: req.body.fullName}] },
     (err, existingUser) => {
       if (err) {
         return next(err);
@@ -169,7 +186,7 @@ exports.postSignup = (req, res, next) => {
           if (err) {
             return next(err);
           }
-          res.redirect("/editprofile");
+          res.redirect("/login");
         });
       });
     }

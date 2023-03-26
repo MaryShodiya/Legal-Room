@@ -29,6 +29,7 @@ module.exports = {
         commentNo: 0,
         question: req.params.id,
         createdBy: req.user.userName,
+        createdByUserImage: req.profile.profileImage,
         createdAt: req.params.createdAt
       },
       {

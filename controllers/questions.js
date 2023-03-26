@@ -26,6 +26,15 @@ res.render('editprofile.ejs', { profile: profile })
 }
 },
 
+getUpdate:  async (req, res) => {
+  try{
+    const profile = await Profile.findOne({ user: req.user.id })
+  res.render('updateprofile.ejs', { profile: profile })
+  } catch (err) {
+    console.log(err)
+  }
+  },
+
 
 getProfile: async (req, res) => {
   try {
@@ -43,9 +52,7 @@ getProfile: async (req, res) => {
   getQuestions: async (req, res) => {
     try {
       const questions = await Question.find().sort({ createdAt: "desc" }).lean();
-  
-      console.log(questions)
-      res.render("question.ejs", { questions: questions, user: req.user, formatDate});
+      res.render("question.ejs", { questions: questions, user: req.user});
     } catch (err) {
       console.log(err);
     }
@@ -55,8 +62,6 @@ getProfile: async (req, res) => {
     
     try {
     
-     
-
       const question = await Question.findById(req.params.id)
       const comments= await Comment.find({question:req.params.id}).sort({createdAt:"asc"}).lean()
       const subcomment = await SubComment.find({comments:req.params.id}).sort({createdAt:"desc"}).lean()

@@ -9,7 +9,7 @@ router.get("/:id", ensureAuth, postsController.getPost);
 
 router.post("/postEditProfile", upload.single("file"), postsController.postEditProfile)
 
-
+router.post ("/updateProfile", upload.single("file"), postsController.updateProfile )
  
 
 

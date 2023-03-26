@@ -49,8 +49,9 @@
 
        <section class="container text-black" style="margin-top: 2rem; padding: 1.5rem;box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;">
       <div class="d-flex p-3 border-bottom">
-        <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img (29).webp" class="rounded-circle"
+       <img src="<%=profile.profileImage %>" class="rounded-circle"
           height="50" alt="Avatar" loading="lazy" />
+          
         <div class=" w-100 h-100 ps-3">
          <div>
             <a href="">
@@ -118,7 +119,7 @@
           <% for(var i=0; i<comments.length; i++) {%>
       <div class="d-flex mb-3">
         <a href="">
-          <img src="https://mdbcdn.b-cdn.net/img/new/avatars/5.webp" class="border rounded-circle me-2"
+          <img src="<%= comments[i].createdByUserImage %> " class="border rounded-circle me-2"
             alt="Avatar" style="height: 40px" />
         </a>
         <div>
@@ -127,7 +128,7 @@
               <strong><%= comments[i].createdBy %></strong>
             </a>
             <a href="" class="text-dark mb-0">
-              <strong><%= comments[i].createdAAt %></strong>
+              <strong><%= comments[i].createdAt %></strong>
             </a>
 
             <a href="" class="text-muted d-block">
